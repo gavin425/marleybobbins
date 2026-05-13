@@ -1,0 +1,36 @@
+<span class="theme-month-icon"></span>
+
+<div class="content theme-text-element">
+    {% if block.settings.title != blank %}
+        <h4>{{ block.settings.title }}</h4>
+    {% endif %}
+
+    {% if block.settings.text != blank %}
+        <p>{{ block.settings.text | newline_to_br }}</p>
+    {% endif %}
+</div>
+
+
+{% schema %}
+{
+    "name": "Fit item",
+    "class": "item",
+    "settings": [
+        { 
+            "type": "text", 
+            "id": "title", 
+            "label": "Title" 
+        },
+        { 
+            "type": "textarea", 
+            "id": "text", 
+            "label": "Text" 
+        }
+    ],
+    "presets": [
+        { 
+            "name": "Fit item" 
+        }
+    ]
+}
+{% endschema %}

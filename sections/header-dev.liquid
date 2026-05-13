@@ -1,0 +1,87 @@
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+<header class="header theme-header">
+  <div class="page-width">
+    <div class="wrapper">
+      <button type="button" class="menu-button" aria-label="Menu"></button>
+
+      {% capture brand %}
+        {% if settings.logo != blank %}
+          <img
+            class="logo"
+            src="{{ settings.logo | image_url: width: settings.logo_width }}"
+            srcset="{{ settings.logo | image_url: width: settings.logo_width }} {{ settings.logo_width }}w"
+            width="{{ settings.logo_width }}"
+            height="{{ settings.logo.height | times: settings.logo_width | divided_by: settings.logo.width }}"
+            loading="eager"
+            fetchpriority="high"
+            alt="{{ settings.logo.alt | default: shop.name | escape }}"
+          >
+        {% else %}
+          <span class="logo">{{ shop.name }}</span>
+        {% endif %}
+      {% endcapture %}
+
+      {% if request.page_type == 'index' %}
+        <div class="logo-wrapper">
+          {{ brand }}
+        </div>
+      {% else %}
+        <a href="{{ routes.root_url }}" class="logo-wrapper">
+          {{ brand }}
+        </a>
+      {% endif %}
+
+      <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Cart">
+        <span class="cart-icon"></span>
+      </a>
+    </div>
+  </div>
+</header>
+
+
+
+{%- if settings.cart_type == 'notification' -%}
+  {%- render 'cart-notification',
+    color_scheme: section.settings.color_scheme,
+    desktop_menu_type: section.settings.menu_type_desktop
+  -%}
+{%- endif -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if settings.logo %}
+      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+{% comment %} {% schema %}
+{
+  "name": "t:sections.header.name",
+  "class": "section-header theme-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    }
+  ]
+}
+{% endschema %} {% endcomment %}

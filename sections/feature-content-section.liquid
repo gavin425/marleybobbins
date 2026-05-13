@@ -1,0 +1,315 @@
+{{ 'feature-content-section.css' | asset_url | stylesheet_tag }}
+{% style %}
+  .stemba .feature-content-section .image-wrapper img.desktop-hidden {
+    aspect-ratio: 600 / 400 !important;
+}
+{% endstyle %}
+<div class="{{section.settings.section_class}} page-width {%- if section.settings.template != blank %} {{ section.settings.template }}{% endif %}">
+
+  {%- if section.settings.pre_title != blank or section.settings.title != blank -%}
+    <div class="head theme-text-element">
+      {%- if section.settings.pre_title != blank -%}
+        <div class="theme-pretitle">{{ section.settings.pre_title }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.image != blank -%}
+    <div class="image-wrapper">
+      {% if section.settings.mimage != blank %}
+      <img
+        class="desktop-hidden" src="{{ section.settings.mimage | image_url: width: 1600 }}"
+        srcset="
+          {{ section.settings.mimage | image_url: width: 600 }} 600w,
+          {{ section.settings.mimage | image_url: width: 900 }} 900w,
+          {{ section.settings.mimage | image_url: width: 1200 }} 1200w,
+          {{ section.settings.mimage | image_url: width: 1600 }} 1600w
+        "
+        sizes="(min-width: 990px) 900px, 100vw"
+        width="{{ section.settings.mimage.width }}"
+        height="{{ section.settings.mimage.height }}"
+        loading="lazy"
+        alt="{{ section.settings.mimage.alt | escape }}"
+      >
+        <img
+         class="mobile-hidden"  src="{{ section.settings.image | image_url: width: 1600 }}"
+        srcset="
+          {{ section.settings.image | image_url: width: 600 }} 600w,
+          {{ section.settings.image | image_url: width: 900 }} 900w,
+          {{ section.settings.image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.image | image_url: width: 1600 }} 1600w
+        "
+        sizes="(min-width: 990px) 900px, 100vw"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        loading="lazy"
+        alt="{{ section.settings.image.alt | escape }}"
+      >
+      {% else %}
+        <img
+        src="{{ section.settings.image | image_url: width: 1600 }}"
+        srcset="
+          {{ section.settings.image | image_url: width: 600 }} 600w,
+          {{ section.settings.image | image_url: width: 900 }} 900w,
+          {{ section.settings.image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.image | image_url: width: 1600 }} 1600w
+        "
+        sizes="(min-width: 990px) 900px, 100vw"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        loading="lazy"
+        alt="{{ section.settings.image.alt | escape }}"
+      >
+      {% endif %}
+    </div>
+  {%- endif -%}
+
+  {% if section.settings.template == 'template-2' %}
+
+    <div class="content-wrapper">
+      <div class="feature-col intro theme-text-element">
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'left' -%}
+
+            {%- if block.settings.style == 'lead' -%}
+              <div class="feature-lead" {{ block.shopify_attributes }}>
+                {%- if block.settings.show_dots -%}
+                  <span class="svg-wrapper" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="20" viewBox="0 0 64 20" fill="none">
+                      <circle cx="10" cy="10" r="10" fill="#F4C6C2"/>
+                      <circle cx="32" cy="10" r="10" fill="#D7795F"/>
+                      <circle cx="54" cy="10" r="10" fill="#CA573B"/>
+                    </svg>
+                  </span>
+                {%- endif -%}
+
+                {{ block.settings.text }}
+              </div>
+
+            {%- elsif block.settings.style == 'note' -%}
+
+              <div  class="note" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </div >
+
+            {%- else -%}
+
+              {%- if block.settings.label != blank -%}
+                <p class="feature-label" {{ block.shopify_attributes }}>
+                  {{ block.settings.label }}
+                </p>
+              {%- endif -%}
+
+              {%- if block.settings.text != blank -%}
+                <div class="feature-paragraph" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </div>
+              {%- endif -%}
+
+            {%- endif -%}
+
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+
+      <div class="feature-col details theme-text-element">
+        
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'right' -%}
+              <div class="feature-item theme-text-element">
+                {%- if block.settings.label != blank -%}
+                  <p class="feature-label" {{ block.shopify_attributes }}>
+                    {{ block.settings.label }}
+                  </p>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <p class="feature-paragraph" {{ block.shopify_attributes }}>
+                    {{ block.settings.text }}
+                  </p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        
+      </div>
+    </div>
+
+  {% else %}
+
+    <div class="content-wrapper">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'left' or block.type == 'right' -%}
+          <div class="feature-block" {{ block.shopify_attributes }}>
+            {%- if block.type == 'left' and block.settings.style == 'lead' -%}
+              <div class="feature-lead theme-text-element">
+                {%- if block.settings.show_dots -%}
+                  <span class="svg-wrapper" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="20" viewBox="0 0 64 20" fill="none">
+                      <circle cx="10" cy="10" r="10" fill="#F4C6C2"/>
+                      <circle cx="32" cy="10" r="10" fill="#D7795F"/>
+                      <circle cx="54" cy="10" r="10" fill="#CA573B"/>
+                    </svg>
+                  </span>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  {{ block.settings.text }}
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              {%- if block.settings.label != blank -%}
+                <p class="feature-label">{{ block.settings.label }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.text != blank -%}
+                <div class="feature-paragraph theme-text-element">{{ block.settings.text }}</div>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  {%- endif -%}
+
+  {%- if section.settings.bottom_text != blank or section.settings.button_label != blank -%}
+    <div class="feature-bottom theme-text-element">
+      {%- if section.settings.bottom_text != blank -%}
+        <p>{{ section.settings.bottom_text }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="theme-btn-secondary with-arrow"
+          href="{% if section.settings.button_link != blank %}{{ section.settings.button_link }}{% else %}#{% endif %}"
+        >
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Feature content",
+  "tag": "section",
+  "class": "feature-content-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_class",
+      "label": "Section Class"
+    },
+    {
+      "type": "select",
+      "id": "template",
+      "label": "Template",
+      "options": [
+        { "value": "template-1", "label": "Template 1 (1 column)" },
+        { "value": "template-2", "label": "Template 2 (2 columns)" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "pre_title",
+      "label": "Pre-title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mimage",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_text",
+      "label": "Bottom text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "left",
+      "name": "Left block",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "lead", "label": "Lead (dots + text)" },
+            { "value": "note", "label": "Note (small text)" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dots",
+          "label": "Show dots"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "right",
+      "name": "Right block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature content",
+      "blocks": [
+        { "type": "left" },
+        { "type": "right" }
+      ]
+    }
+  ]
+}
+{% endschema %}

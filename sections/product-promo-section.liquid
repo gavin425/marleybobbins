@@ -1,0 +1,256 @@
+{{ 'product-promo-section.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+assign featured_product = section.settings.product
+if featured_product == blank
+    assign featured_product = nil
+endif
+
+assign is_same_product_page = false
+if request.page_type == 'product' and product and featured_product and product.id == featured_product.id
+    assign is_same_product_page = true
+endif
+
+if featured_product
+    assign selected_variant = featured_product.selected_or_first_available_variant
+else
+    assign selected_variant = nil
+endif
+
+assign product_form_id = 'product-promo-form-' | append: section.id
+
+if section.settings.image != blank
+    assign img = section.settings.image
+elsif featured_product and featured_product.featured_media and featured_product.featured_media.preview_image
+    assign img = featured_product.featured_media.preview_image
+else
+    assign img = nil
+endif
+%}
+
+
+<div class="page-width">
+    {% if featured_product == nil %}
+        {% if request.design_mode %}
+            <div class="product-promo__empty">
+                <p>Please select a product in the section settings.</p>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="wrapper">
+            <div class="product-promo__media">
+                {% if img != blank %}
+                    <img
+                        src="{{ img | image_url: width: 1400 }}"
+                        srcset="
+                            {{ img | image_url: width: 400 }} 400w,
+                            {{ img | image_url: width: 800 }} 800w,
+                            {{ img | image_url: width: 1200 }} 1200w,
+                            {{ img | image_url: width: 1400 }} 1400w
+                        "
+                        sizes="(min-width: 990px) 50vw, 100vw"
+                        width="{{ img.width }}"
+                        height="{{ img.height }}"
+                        loading="lazy"
+                        decoding="async"
+                        alt="{{ img.alt | escape }}"
+                        class="product-promo__image"
+                    >
+                {% endif %}
+            </div>
+
+            <div class="product-promo__meta theme-text-element">
+            {% if section.settings.title != blank %}
+                <h2 class="product-promo__title">{{ section.settings.title }}</h2>
+            {% else %}
+                <h2 class="product-promo__title">{{ featured_product.title | escape }}</h2>
+            {% endif %}
+
+            {% if featured_product.description != blank %}
+                <div class="product-promo__description theme-text-element">
+                    {{ featured_product.description }}
+                </div>
+            {% endif %}
+
+            <div class="product-promo__purchase">
+                <div class="product-promo__price-stock">
+                    <div class="product-promo__price" role="status">
+                        {% render 'price',
+                            product: featured_product,
+                            use_variant: true,
+                            price_class: 'price--large'
+                        %}
+                    </div>
+
+                    <div class="product-promo__stock" role="status">
+                        {% if selected_variant and selected_variant.available %}
+                            <span class="in-stock">In stock</span>
+                        {% else %}
+                            <span class="out-stock">Out of stock</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="product-promo__cta">
+                    {% if is_same_product_page %}
+                        {% form 'product',
+                            featured_product,
+                            id: product_form_id,
+                            class: 'product-promo__form',
+                            novalidate: 'novalidate',
+                            data-type: 'add-to-cart-form'
+                            %}
+                            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+                            <button
+                                type="submit"
+                                name="add"
+                                class="theme-btn-primary with-arrow product-promo__buy"
+                                {% if selected_variant == nil or selected_variant.available == false %}disabled{% endif %}
+                            >
+                                {% if selected_variant and selected_variant.available %}
+                                    {{ section.settings.button_label | default: 'Buy Daysy' }}
+                                {% else %}
+                                    {{ section.settings.soldout_label | default: 'SOLD OUT' }}
+                                {% endif %}
+                            </button>
+                        {% endform %}
+                    {% else %}
+                        <a class="theme-btn-primary product-promo__buy" href="{{ featured_product.url }}">
+                            {{ section.settings.button_label | default: 'Buy Daysy' }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <span class="product-promo__purchase-note">One-time purchase</span>
+
+            {% assign has_logos = false %}
+            {% for block in section.blocks %}
+                {% if block.type == 'logo' and block.settings.image != blank %}
+                    {% assign has_logos = true %}
+                {% break %}
+                {% endif %}
+            {% endfor %}
+
+            {% if has_logos %}
+                <div class="product-promo__logos" aria-label="Payment and trust logos">
+                    {% for block in section.blocks %}
+                        {% if block.type == 'logo' and block.settings.image != blank %}
+                            <div class="product-promo__logo" {{ block.shopify_attributes }}>
+                                {% if block.settings.link != blank %}
+                                    <a href="{{ block.settings.link }}" class="product-promo__logo-link">
+                                {% endif %}
+
+                                <img
+                                    src="{{ block.settings.image | image_url: width: block.settings.image.width }}"
+                                    width="{{ block.settings.image.width }}"
+                                    height="{{ block.settings.image.height }}"
+                                    loading="lazy"
+                                    alt="{{ block.settings.image.alt | escape }}"
+                                >
+
+                                {% if block.settings.link != blank %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% unless is_same_product_page %}
+    <script src="{{ 'main-product.js' | asset_url }}" defer="defer"></script>
+
+    <div class="product-sticky-bar" data-product-sticky data-sticky-scope="product-promo" aria-hidden="true">
+        <div class="page-width">
+            <div class="product-sticky-bar__inner product-promo__purchase">
+                {% comment %} <div class="product-sticky-bar__purchase" data-product-sticky-purchase></div> {% endcomment %}
+
+                <a
+                    href="{{ featured_product.url }}"
+                    class="product-sticky-bar__button theme-btn-primary with-arrow"
+                    data-product-sticky-cta
+                >
+                    {{ section.settings.button_label | default: 'Buy Daysy' }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endunless %}
+
+{% schema %}
+{
+    "name": "Product promo",
+    "tag": "section",
+    "class": "product-promo-section",
+    "settings": [
+        {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image (override product image)"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+        },
+        {
+            "type": "text",
+            "id": "soldout_label",
+            "label": "Sold out label"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "logo",
+            "name": "Logo",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Logo image"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Logo link (optional)"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+        "name": "Product promo",
+        "blocks": [
+            { 
+                "type": "logo" 
+            },
+            { 
+                "type": "logo" 
+            },
+            { 
+                "type": "logo" 
+            },
+            { 
+                "type": "logo" 
+            }
+        ]
+        }
+    ]
+}
+{% endschema %}

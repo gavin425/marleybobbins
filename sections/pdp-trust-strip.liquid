@@ -1,0 +1,142 @@
+{{ 'pdp-trust-strip.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width{% if section.settings.bg != blank %} {{ section.settings.bg }}{% endif %}">
+  <div class="wrapper{% if section.settings.template != blank %} {{section.settings.template}}{% endif %}">
+
+    <div class="trust-strip">
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'item' -%}
+          <div class="trust-item" {{ block.shopify_attributes }}>
+
+            {%- if block.settings.icon != blank -%}
+              <div class="icon">
+                <img
+                  src="{{ block.settings.icon | image_url: width: block.settings.icon.width }}"
+                  srcset="
+                    {{ block.settings.icon | image_url: width: block.settings.icon.width }} {{ block.settings.icon.width }}w
+                  "
+                  sizes="{{ block.settings.icon.width }}px"
+                  width="{{ block.settings.icon.width }}"
+                  height="{{ block.settings.icon.height }}"
+                  loading="lazy"
+                  alt="{{ block.settings.icon.alt | escape }}"
+                >
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.title != blank -%}
+              <div class="title">{{ block.settings.title }}</div>
+            {%- endif -%}
+
+          </div>
+          {%- unless forloop.last -%}
+            {%- unless section.settings.hide_divider -%}
+              <div class="trust-divider" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="53" viewBox="0 0 25 53" fill="none">
+                  <path d="M1.1601 52.1999H9.76995e-05L23.2001 -9.83477e-05H24.3601L1.1601 52.1999Z" fill="#751612" fill-opacity="0.2"/>
+                </svg>
+              </div>
+            {%- endunless -%}
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+
+    {%- if section.settings.note != blank -%}
+      <div class="trust-note">
+        {{ section.settings.note }}
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "PDP trust strip",
+  "tag": "section",
+  "class": "pdp-trust-strip",
+  "settings": [
+    {
+      "type": "select",
+      "id": "template",
+      "label": "Template",
+      "default": "template-1",
+      "options": [
+          {
+              "value": "template-1",
+              "label": "Template 1"
+          },
+          {
+              "value": "template-2",
+              "label": "Template 2"
+          }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_divider",
+      "label": "Hide divider",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bg",
+      "label": "Background",
+      "default": "bg-primary",
+      "options": [
+        { 
+          "value": "bg-primary",
+          "label": "Background primary"
+        },
+        { 
+          "value": "bg-secondary",
+          "label": "Background secondary"
+        }
+      ]
+    },
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title",
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP trust strip",
+      "blocks": [
+        { 
+            "type": "item" 
+        },
+        { 
+            "type": "item" 
+        },
+        { 
+            "type": "item" 
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,75 @@
+.stemba .marquee-section{
+  background-color: var(--theme-color-primary);
+  padding: 28px 0;
+  height: 70px;
+}
+
+.stemba .marquee-section .marquee{
+  animation: movingSlider 30s linear infinite;
+  flex-shrink: 0;
+}
+
+.stemba .marquee-section .marquee-wrapper{
+  overflow: hidden;
+  display: flex;
+  gap: 40px;
+}
+
+.stemba .marquee-section .marquee-wrapper:hover .marquee{
+  animation-play-state: paused;
+}
+
+.stemba .marquee-section .marquee-track{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.stemba .marquee-section .marquee-item{
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  white-space: nowrap;
+}
+
+.stemba .marquee-section .marquee-text{
+  color: var(--theme-helper-color-tertiary);
+  font-family: var(--theme-font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.24px;
+  text-transform: uppercase;
+}
+
+.stemba .marquee-section .marquee-icon{
+  width: 11px;
+  height: 11px;
+  background-color: var(--theme-helper-color-tertiary);
+}
+
+@keyframes movingSlider{
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 768px){
+
+  .stemba .marquee-section{
+    padding: 19px 0;
+    height: 50px;
+  }
+
+  .stemba .marquee-section .marquee-text{
+    font-size: var(--theme-fs-body-mobile-sm);
+  }
+
+  .stemba .marquee-section .marquee-track{
+    gap: 20px;
+  }
+
+  .stemba .marquee-section .marquee-item{
+    gap: 20px;
+  }
+}

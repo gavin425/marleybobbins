@@ -1,0 +1,167 @@
+{{ 'reviews-section.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width">
+    <div class="wrapper{% if section.settings.template != blank %} {{section.settings.template}}{% endif %}">
+
+        {%- if section.settings.pre_title != blank or section.settings.title != blank -%}
+            <div class="head theme-text-element">
+
+                {%- if section.settings.pre_title != blank -%}
+                    <p class="theme-pretitle">{{ section.settings.pre_title }}</p>
+                {%- endif -%}
+
+                {%- if section.settings.title != blank -%}
+                    <h2>{{ section.settings.title }}</h2>
+                {%- endif -%}
+
+            </div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+            <div class="reviews">
+
+                {%- for block in section.blocks -%}
+                    {%- if block.type == 'review' -%}<div class="review theme-text-element{% if block.settings.author_img != blank %} profile-card{% endif %}{% if block.settings.ntext contains 'Dr Katherine Clark' %} clinical-card{% endif %}" {{ block.shopify_attributes }}>
+                       
+                            {% if block.settings.quote %}
+                            <span class="quote-mark" aria-hidden="true"></span>
+                            {% endif %}
+                            {% if block.settings.author_img != blank %}
+                                <div class="rev-img">
+                                <img width="" height="" src="{{ block.settings.author_img | image_url }}">
+                                </div>
+                            {% endif %}
+                            {%- if block.settings.text != blank -%}
+                                <div class="review-text">
+                                    {{ block.settings.text }}
+                                </div>
+                            {%- endif -%}
+                        {%- if block.settings.ntext != blank -%}
+                                <div class="review-norm-text">
+                                    {{ block.settings.ntext }}
+                                </div>
+                            {%- endif -%}
+                            
+                                <div class="review-author">
+                                     {%- if block.settings.author != blank -%}
+                                         {%- if section.settings.template == "template-1" -%}
+                                     <img width="80" height="" src="https://cdn.shopify.com/s/files/1/0725/5264/4802/files/stars.png?v=1777025961">
+                                            {% endif %}
+                                    {{ block.settings.author }}
+                                     {%- endif -%}
+                                    </div>
+                           
+
+                            {%- if block.settings.verified_label != blank -%}
+                                <p class="review-verified">
+                                    {{ block.settings.verified_label }}
+                                </p>
+                            {%- endif -%}
+
+                        </div>
+                    {%- endif -%}
+                {%- endfor -%}
+
+            </div>
+        {%- endif -%}
+
+    </div>
+    {%- if section.settings.show_underline -%}
+        <span class="theme-bottom-underline" aria-hidden="true"></span>
+    {%- endif -%}
+</div>
+
+{% schema %}
+{
+    "name": "Reviews",
+    "tag": "section",
+    "class": "reviews-section",
+    "settings": [
+        {
+            "type": "select",
+            "id": "template",
+            "label": "Template",
+            "default": "template-1",
+            "options": [
+                {
+                    "value": "template-1",
+                    "label": "Template 1"
+                },
+                {
+                    "value": "template-2",
+                    "label": "Template 2"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "pre_title",
+            "label": "Pre-title"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_underline",
+            "label": "Show underline",
+            "default": false
+        }
+    ],
+    "blocks": [
+        {
+            "type": "review",
+            "name": "Review",
+            "settings": [
+                {
+                    "type": "richtext",
+                    "id": "ntext",
+                    "label": "Normal text"
+                },
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Review text",
+                    "default": "I was tracking everything and still felt unsure every month. Daysy gave me one clear signal I could finally trust."
+                },
+                {
+                    "type": "image_picker",
+                    "id": "author_img",
+                    "label": "Author Image"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "quote",
+                    "label": "Quote Marks",
+                    "default": true
+                },
+                {
+                    "type": "text",
+                    "id": "author",
+                    "label": "Author",
+                },
+                {
+                    "type": "text",
+                    "id": "verified_label",
+                    "label": "Verified label text",
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Reviews",
+            "blocks": [
+                { 
+                    "type": "review" 
+                },
+                { 
+                    "type": "review" 
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

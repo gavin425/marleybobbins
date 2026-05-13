@@ -1,0 +1,380 @@
+{{ 'text-image-section.css' | asset_url | stylesheet_tag }}
+{% style %}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.mpadding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.mpadding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+.stemba .text-image-section .image-wrapper::before{
+    content: '';
+    width: 50px;
+    height: 50px;
+    display: block;
+    border-radius: 100%;
+    background-color: var(--theme-color-secondary);
+    position: absolute;
+}
+.stemba .text-image-section.pink-dot .image-wrapper::before{
+   background: #F4C6C2;
+}
+
+
+{% if section.settings.img-pos == "left" %}
+  .stemba .section-{{ section.id }}-padding.text-image-section .wrapper{
+      flex-flow:row;
+          align-items: center;
+  }
+{% else %}
+  .stemba .section-{{ section.id }}-padding.text-image-section .wrapper{
+    flex-flow:row-reverse ;
+}
+{% endif %}
+{% if section.settings.img-border == "right-border" %}
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper::before{
+      top: 0;
+      right: 0;
+  }
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper img{
+      border-radius: 20px 240px 20px 20px;
+  }
+  .stemba .full-border.text-image-section .section-{{ section.id }}.image-wrapper::before{
+      display:none;
+  }
+  .stemba .full-border.text-image-section .section-{{ section.id }}.image-wrapper img{
+      border-radius: 20px 20px 20px 20px;
+  }
+{% elsif section.settings.img-border == "left-border" %}
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper::before{
+    bottom: 0;
+    left: 0;
+  }
+  .stemba .full-border.text-image-section .section-{{ section.id }}.image-wrapper::before{
+    display:none;
+  }
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper img{
+      border-radius: 20px 20px 20px 240px;
+  }
+  .stemba .full-border.text-image-section .section-{{ section.id }}.image-wrapper img{
+      border-radius: 20px 20px 20px 20px;
+  }
+{% elsif section.settings.img-border == "left-right-border" %}
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper::after{
+      content: '';
+      width: 50px;
+      height: 50px;
+      display: block;
+      border-radius: 100%;
+      position: absolute;
+  }
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper::before{
+    background-color:  #F4C6C2;
+    bottom: 0;
+    left: 0;
+  }
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper::after{
+    background-color:  #F4C6C2;
+    top: 0;
+    right: 0;
+  }
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper img{
+      border-radius: 0 240px 0 240px;
+  }
+{% else %}
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper::before{
+    top: 0;
+    right: 0;
+  }
+  .stemba .text-image-section .section-{{ section.id }}.image-wrapper img{
+      border-radius: 0 240px 0 0;
+  }
+{% endif %}
+
+@media (max-width: 768px){
+    .stemba .section-{{ section.id }}-padding.text-image-section .wrapper{
+      flex-flow:column;
+  }
+}
+{% endstyle %}
+
+<div class="{{section.settings.section-class}} text-image-section color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+  <div class="wrapper page-width">
+
+    <div class="text-wrap">
+
+      <div class="head theme-text-element">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+            {%- when 'pretitle' -%}
+              {%- if block.settings.text != blank -%}
+                <p class="theme-pretitle" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </p>
+              {%- endif -%}
+
+            {%- when 'title' -%}
+              {%- if block.settings.text != blank -%}
+                <h2 {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </h2>
+              {%- endif -%}
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="content theme-text-element">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+            {%- when 'text' -%}
+              {%- if block.settings.text != blank -%}
+                <div class="text {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </div>
+              {%- endif -%}
+
+            {%- when 'button' -%}
+              {%- if block.settings.label != blank and block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="{% if section.settings.section-class contains 'btn-primary' %} theme-btn-primary with-arrow{% else %}theme-btn-secondary with-arrow{% endif %}" {{ block.shopify_attributes }}>
+                  {{ block.settings.label }}
+                </a>
+              {%- endif -%}
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+
+    <div class="image-wrapper section-{{ section.id }}">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1600 }}"
+          srcset="
+            {{ section.settings.image | image_url: width: 600 }} 600w,
+            {{ section.settings.image | image_url: width: 900 }} 900w,
+            {{ section.settings.image | image_url: width: 1200 }} 1200w,
+            {{ section.settings.image | image_url: width: 1600 }} 1600w
+          "
+          sizes="(min-width: 990px) 50vw, 100vw"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+          alt="{{ section.settings.image.alt | escape }}"
+        >
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  {%- if section.settings.show_underline -%}
+    <span class="theme-bottom-underline" aria-hidden="true"></span>
+  {%- endif -%}
+</div>
+
+
+{% schema %}
+{
+  "name": "Text image",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section-class",
+      "label": "Section Class"
+    },
+    {
+            "type": "select",
+            "id": "img-border",
+            "label": "Image Border",
+            "default": "right-border",
+            "options": [
+                {
+                    "value": "right-border",
+                    "label": "Right Border"
+                },
+                {
+                    "value": "left-border",
+                    "label": "Left Border"
+                },
+                {
+                    "value": "left-right-border",
+                    "label": "Both Left-Right"
+                }
+            ]
+    },
+    {
+            "type": "select",
+            "id": "img-pos",
+            "label": "Image Position",
+            "default": "right",
+            "options": [
+                {
+                    "value": "right",
+                    "label": "Right"
+                },
+                {
+                    "value": "left",
+                    "label": "Left"
+                }
+            ]
+    },
+    {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "t:sections.all.colors.label",
+            "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_underline",
+      "label": "Show underline at bottom",
+      "default": false
+    },
+    {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 40
+    },
+    {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 52
+    },
+    {
+        "type": "range",
+        "id": "mpadding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Mobile Padding Top",
+        "default": 40
+    },
+    {
+        "type": "range",
+        "id": "mpadding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Mobile Padding Bottom",
+        "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pretitle",
+      "name": "Pre-title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "The Science"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "The Science behind Daysy"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "label": "Text style",
+          "default": "style-1",
+          "options": [
+            { 
+                "value": "style-1", 
+                "label": "Style 1" 
+            },
+            { 
+                "value": "style-2", 
+                "label": "Style 2" 
+            },
+            { 
+                "value": "style-3", 
+                "label": "Style 3" 
+            },
+            { 
+                "value": "style-4", 
+                "label": "Style 4" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Text",
+          "default": "See the science behind Daysy"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text image",
+      "blocks": [
+        { "type": "pretitle" },
+        { "type": "title" },
+        { "type": "text" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}

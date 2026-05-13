@@ -1,0 +1,49 @@
+.stemba .message-section{
+    position: relative;
+    padding: 150px 0;
+}
+
+.stemba .message-section .theme-month-icon{
+    width: 25px;
+    height: 25px;
+    margin: 100px auto;
+}
+
+.stemba .message-section .wrapper{
+    max-width: 773px;
+    margin: 0 auto;
+}
+
+.stemba .message-section p{
+    font-weight: 400;
+    font-size: var(--theme-fs-h2);
+    text-align: center;
+    font-family: var(--theme-font-family-primary);
+}
+
+.stemba .message-section .theme-btn-primary{
+    margin: 60px auto 0;
+}
+
+@media (max-width: 768px) {
+    .stemba .message-section{
+        padding: 90px 0 45px;
+    }
+
+    .stemba .message-section .theme-bottom-underline{
+        display: none;
+    }
+
+    .stemba .message-section .theme-month-icon{
+        width: 20px;
+        height: 20px;
+        margin: 80px auto;
+    }
+
+    .stemba .message-section p{
+        font-size: 30px;
+        max-width: 268px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}

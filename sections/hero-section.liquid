@@ -1,0 +1,179 @@
+{{ 'hero-section.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.mopadding_top }}px;
+    padding-bottom: {{ section.settings.mopadding_bottom }}px;
+  }
+  {% if section.settings.blur-backgroundn %}
+  .stemba .hero-section::before{
+    display:none;
+    }
+    {% endif %}
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+<div class="page-width section-{{ section.id }}-padding {{ section.settings.section-class }}">
+    <div class="hero">
+        <div class="head theme-text-element">
+            
+            {% render 'breadcrumbs' %}
+
+            {%- if section.settings.title != blank -%}
+                <h1>{{ section.settings.title }}</h1>
+            {%- endif -%}
+        </div>
+
+
+        <div class="hero-media">
+            {% if section.settings.both_animation %}
+        <div class="a-rimg pos-top-right">
+         <img width="" height="" src="https://cdn.shopify.com/s/files/1/0725/5264/4802/files/Ellipse_11.svg?v=1772714789">
+        </div>
+        {% endif %}
+         {% if section.settings.both_animation %}
+        <div class="a-rimg pos-bottom-left">
+         <img width="" height="" src="https://cdn.shopify.com/s/files/1/0725/5264/4802/files/Ellipse_11.svg?v=1772714789">
+        </div>
+        {% endif %}
+        {%- if section.settings.m-image != blank -%}
+            <div class="mobile-hidden image {% if section.settings.both_animation %} both_ani {% endif %}">
+                {{ section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'eager' }}
+            </div>
+            <div class="desktop-hidden image {% if section.settings.both_animation %} both_ani {% endif %}">
+                {{ section.settings.m-image | image_url: width: section.settings.m-image.width | image_tag: loading: 'eager' }}
+            </div>
+        {% else %}
+            {%- if section.settings.image != blank -%}
+                <div class="image {% if section.settings.both_animation %} both_ani {% endif %}">
+                    {{ section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'eager' }}
+                </div>
+            {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.text != blank or section.settings.button_label != blank -%}
+            <div class="content">
+
+            {%- if section.settings.text != blank -%}
+                <div class="text">
+                    <span class="theme-month-icon"></span>
+                    <p>{{ section.settings.text }}</p>
+                </div>
+            {%- endif -%}
+
+            {%- if section.settings.button_label != blank and section.settings.button_url != blank -%}
+                <a class="theme-btn-secondary with-arrow" href="{{ section.settings.button_url }}">
+                    {{ section.settings.button_label }}
+                </a>
+            {%- endif -%}
+
+            </div>
+        {%- endif -%}
+
+        </div>
+
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Hero",
+    "tag": "section",
+    "class": "hero-section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "section-class",
+            "label": "Section Class"
+        },
+        {
+            "type": "checkbox",
+            "id": "both_animation",
+            "label": "Both Side Border"
+        },
+        {
+            "type": "checkbox",
+            "id": "blur-backgroundn",
+            "label": "Hide Blur"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Desktop Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "m-image",
+            "label": "Mobile Image"
+        },
+        {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label",
+        },
+        {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button link"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 200,
+            "step": 2,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 200,
+            "step": 2,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 150
+        },
+        {
+            "type": "range",
+            "id": "mopadding_top",
+            "min": 0,
+            "max": 200,
+            "step": 2,
+            "unit": "px",
+            "label": "Mobile Padding Top",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "mopadding_bottom",
+            "min": 0,
+            "max": 200,
+            "step": 2,
+            "unit": "px",
+            "label": "Mobile Padding Bottom",
+            "default": 52
+        }
+    ],
+    "presets": [
+        {
+            "name": "Hero"
+        }
+    ]
+}
+{% endschema %}

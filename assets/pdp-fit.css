@@ -1,0 +1,239 @@
+/* .stemba .pdp-fit-section{
+    max-width:1620px;
+} */
+
+.stemba .pdp-fit-section .head{
+    margin: 0 auto;
+    max-width: 794px;
+    width: 100%
+}
+
+.stemba .pdp-fit-section .head h2{
+    max-width: 665px;
+    width: 100%;
+    text-align: center;
+    margin: 70px auto 20px;
+}
+
+.stemba .pdp-fit-section .head p{
+    text-align: center;
+}
+
+.stemba .pdp-fit-section .head .theme-pretitle{
+    justify-content: center;
+    line-height: 1;
+}
+
+.stemba .pdp-fit-section .head .text-primary{
+    margin-top: 60px;
+}
+
+.stemba .pdp-fit-section .head .text-secondary{
+    font-size: var(--theme-fs-h5);
+}
+.stemba .pdp-fit-section .head .text-secondary-above{
+    font-size: 16px;
+}
+
+.stemba .pdp-fit-section .theme-btn-primary{
+    margin: 0 auto;
+}
+.stemba .pdp-fit-section .cards{
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+
+.stemba .pdp-fit-section .theme-slider{
+    margin: 0 calc(var(--slides-gap) / -2);
+    --slides-count: 2;
+    --slides-gap: 5px;
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-wrapper{
+  align-items: stretch;
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide{
+    width: calc(100% / var(--slides-count));
+    padding: 0 calc(var(--slides-gap) / 2);
+    height: auto;
+    display: flex;
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide .slide{
+    padding: 80px;
+    border-radius: var(--theme-radius);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-light.slide,
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-dark.slide .theme-month-icon{
+    background-color: var(--theme-helper-color-tertiary);
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-light .theme-next-btn,
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-light .theme-month-icon{
+    background-color: var(--theme-color-secondary);
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-dark.slide{
+    background-color: var(--theme-color-primary);
+    
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-dark .theme-next-btn{
+    background-color: var(--theme-helper-color-primary);
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-dark .theme-next-btn::before{
+    background-color: var(--theme-color-secondary);
+}
+
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-dark.slide,
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-dark.slide h3,
+.stemba .pdp-fit-section .theme-slider .swiper-slide .color-dark.slide h4{
+    color: var(--theme-helper-color-tertiary);
+}
+
+.stemba .pdp-fit-section .slide h3{
+    font-size: var(--theme-fs-h4);
+    margin-top: 0;
+    margin-bottom: 60px;
+    line-height: 1.1;
+}
+
+.stemba .pdp-fit-section .slide .items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--items-gap-y) var(--items-gap-x);
+}
+
+.stemba .pdp-fit-section .slide .items .item{
+    width: calc(100% / var(--items-count) - ((var(--items-gap-x) * (var(--items-count) - 1) / var(--items-count))));
+}
+
+.stemba .pdp-fit-section .slide .items .item h4{
+    font-size: var(--theme-fs-body-xxl);
+    font-weight: 600;
+    line-height: var(--theme-lh-xl);
+    font-family: var(--theme-font-family-secondary);
+    margin-bottom: 28px;
+}
+
+.stemba .pdp-fit-section .slide .items .item .theme-month-icon{
+    margin-bottom: 40px;
+}
+
+.stemba .pdp-fit-section .theme-slider .theme-next-btn{
+    display: none;
+}
+
+@media (max-width: 1200px){
+    .stemba .pdp-fit-section .theme-slider .swiper-slide .slide{
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 991px){
+    /* .stemba .pdp-fit-section{
+        padding: 70px 0 60px;
+    } */
+
+    .stemba .pdp-fit-section .head .theme-pretitle{
+        justify-content: flex-start;
+    }
+
+    .stemba .pdp-fit-section .head h2{
+        text-align: left;
+        margin: 40px 0 0;
+    }
+
+    .stemba .pdp-fit-section .theme-slider .swiper-slide .slide{
+        padding: 40px 60px 40px 40px;
+        position: relative;
+        width: calc(100% - 0px);   
+    }
+
+    .stemba .pdp-fit-section .theme-slider{
+        --slides-count: 1;
+    }
+
+    .stemba .pdp-fit-section .slide .items{
+        --items-count: 1;
+        --items-gap-y: 18px;
+    }
+
+    .stemba .pdp-fit-section .theme-slider .theme-next-btn{
+        display: flex;
+        position: absolute;
+        top: 100px;
+        right: -20px;
+    }
+
+    .stemba .pdp-fit-section .head .text-primary{
+        margin-top: 40px;
+        text-align: left;
+    }
+
+    .stemba .pdp-fit-section .head .text-secondary, .stemba .pdp-fit-section .head .text-secondary p{
+        text-align: left;
+    }
+
+    .stemba .pdp-fit-section .cards{
+        margin-top: 41px;
+    }
+
+    .stemba .pdp-fit-section .slide .items .item{
+        display: flex;
+        gap: 14px;
+    }
+
+    .stemba .pdp-fit-section .slide .items .item .theme-month-icon{
+        width: 11px;
+        height: 11px;
+        margin: 4px 0 0;
+        flex-shrink: 0;
+    }
+
+    .stemba .pdp-fit-section .slide h3 {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 768px){
+    .stemba .pdp-fit-section .head h2{
+        max-width: 335px;
+    }
+
+    .stemba .pdp-fit-section .head .text-primary {
+        font-size: calc(var(--theme-fs-body-mobile-sm) + 2px)
+    }
+
+    .stemba .pdp-fit-section .head .text-secondary{
+        font-size: 14px;
+    }
+
+    .stemba .pdp-fit-section .slide h3 {
+        font-size: calc(var(--theme-fs-body-mobile-lg) + 1px)
+    }
+
+    .stemba .pdp-fit-section .slide .items .item h4{
+        font-size: calc(var(--theme-fs-body-mobile-md) - 1px);
+        margin-bottom: 18px;
+    }
+
+    .stemba .pdp-fit-section .slide .items .item p{
+        font-size: calc(var(--theme-fs-body-mobile-sm) + 2px);
+    }
+    .stemba .pdp-fit-section .theme-slider .swiper-wrapper {
+        flex-flow: column;
+        gap: 10px;
+    }
+    button.theme-next-btn.pd-fit, button.theme-next-btn.pd-fit  {
+        display: none !important;
+    }
+
+}

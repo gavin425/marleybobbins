@@ -1,0 +1,72 @@
+{{ 'message-section.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width">
+  <div class="wrapper theme-text-element">
+    <span class="theme-month-icon" aria-hidden="true"></span>
+
+    {%- if section.settings.text_1 != blank -%}
+      <p class="message-text">{{ section.settings.text_1 }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.text_2 != blank -%}
+      <p class="message-text">{{ section.settings.text_2 }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <a class="theme-btn-primary with-arrow" href="{{ section.settings.button_link }}">
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+
+    <span class="theme-month-icon" aria-hidden="true"></span>
+
+  </div>
+
+  {%- if section.settings.show_underline -%}
+    <span class="theme-bottom-underline" aria-hidden="true"></span>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Message",
+  "tag": "section",
+  "class": "message-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Text 1",
+      "default": "You don't have to keep guessing."
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Text 2",
+      "default": "Daysy gives you something real to work with"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Get clarity as you TTC"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_underline",
+      "label": "Show underline",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Message"
+    }
+  ]
+}
+{% endschema %}

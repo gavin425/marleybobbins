@@ -1,0 +1,85 @@
+<footer class="footer theme-footer">
+  <div class="footer-top">
+    <div class="page-width">
+      <div class="wrapper">
+        <div class="logo">
+          <div class="mark">
+            <span class="theme-month-icon" aria-hidden="true"></span>
+            <div class="brand">
+              {% if settings.logo != blank %}
+                <img
+                  src="{{ settings.logo | image_url: width: 300 }}"
+                  srcset="
+                    {{ settings.logo | image_url: width: 150 }} 150w,
+                    {{ settings.logo | image_url: width: 300 }} 300w,
+                    {{ settings.logo | image_url: width: 450 }} 450w
+                  "
+                  sizes="150px"
+                  width="{{ settings.logo.width }}"
+                  height="{{ settings.logo.height }}"
+                  loading="lazy"
+                  alt="{{ settings.logo.alt | default: shop.name | escape }}"
+                >
+              {% else %}
+                {{ shop.name }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="menus">
+          <nav class="menu" aria-label="Product">
+            <span class="menu-title">PRODUCT</span>
+            <ul>
+              <li><a href="#">Daysy</a></li>
+              <li><a href="#">How Daysy Works</a></li>
+              <li><a href="#">The Science Behind Daysy</a></li>
+              <li><a href="#">About Stemba</a></li>
+            </ul>
+          </nav>
+
+          <nav class="menu" aria-label="Follow us">
+            <span class="menu-title">FOLLOW US</span>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">Tik Tok</a></li>
+            </ul>
+          </nav>
+
+          <nav class="menu" aria-label="Support">
+            <span class="menu-title">SUPPORT</span>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <p class="description">
+          Daysy is not a contraceptive device and is not intended to diagnose or treat medical conditions.
+          If you have concerns about your cycle or fertility, please consult a healthcare professional.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="page-width">
+      <div class="bottom">
+        <nav class="menu bottom-menu" aria-label="Footer legal">
+          <ul>
+            <li><a class="bottom-link" href="#">Privacy Policy</a></li>
+            <li><a class="bottom-link" href="#">Terms &amp; Conditions</a></li>
+            <li><a class="bottom-link" href="#">Returns &amp; Refunds</a></li>
+          </ul>
+        </nav>
+
+        <div class="copyright">
+          © 2025 Stemba. All rights reserved
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,147 @@
+{%- comment -%}
+  Universal breadcrumbs + JSON-LD for:
+  - product: Home / Product
+  - page: Home / Page title
+  - blog: Home / Blog title
+  - article: Home / Blog (link) / Article title
+  - collection: Home / Collection title
+
+  Usage:
+    {% render 'breadcrumbs' %}
+{%- endcomment -%}
+
+<nav class="breadcrumbs" aria-label="Breadcrumbs">
+  <a href="{{ routes.root_url }}">Home</a>
+
+  {%- if template.name == 'product' -%}
+    <span class="theme-month-icon" aria-hidden="true"></span>
+    <span class="current" aria-current="page">{{ product.title | escape }}</span>
+
+  {%- elsif template.name == 'collection' -%}
+    <span class="theme-month-icon" aria-hidden="true"></span>
+    <span class="current" aria-current="page">{{ collection.title | escape }}</span>
+
+  {%- elsif template.name == 'blog' -%}
+    <span class="theme-month-icon" aria-hidden="true"></span>
+    <span class="current" aria-current="page">{{ blog.title | escape }}</span>
+
+  {%- elsif template.name == 'article' -%}
+    <span class="theme-month-icon" aria-hidden="true"></span>
+    <a href="{{ blog.url }}">{{ blog.title | escape }}</a>
+
+    <span class="theme-month-icon" aria-hidden="true"></span>
+    <span class="current" aria-current="page">{{ article.title | escape }}</span>
+
+  {%- elsif template.name == 'page' -%}
+    <span class="theme-month-icon" aria-hidden="true"></span>
+    <span class="current" aria-current="page">{{ page.title | escape }}</span>
+
+  {%- else -%}
+    <span class="theme-month-icon" aria-hidden="true"></span>
+    <span class="current" aria-current="page">{{ page_title | escape }}</span>
+  {%- endif -%}
+</nav>
+
+{%- capture breadcrumb_items -%}
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": {{ request.origin | append: routes.root_url | json }},
+      "name": "Home"
+    }
+  }
+  {%- assign pos = 1 -%}
+
+  {%- if template.name == 'product' -%}
+    {%- assign pos = pos | plus: 1 -%}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ pos }},
+      "item": {
+        "@id": {{ request.origin | append: product.url | json }},
+        "name": {{ product.title | escape | json }}
+      }
+    }
+
+  {%- elsif template.name == 'collection' -%}
+    {%- assign pos = pos | plus: 1 -%}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ pos }},
+      "item": {
+        "@id": {{ request.origin | append: collection.url | json }},
+        "name": {{ collection.title | escape | json }}
+      }
+    }
+
+  {%- elsif template.name == 'blog' -%}
+    {%- assign pos = pos | plus: 1 -%}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ pos }},
+      "item": {
+        "@id": {{ request.origin | append: blog.url | json }},
+        "name": {{ blog.title | escape | json }}
+      }
+    }
+
+  {%- elsif template.name == 'article' -%}
+    {%- assign pos = pos | plus: 1 -%}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ pos }},
+      "item": {
+        "@id": {{ request.origin | append: blog.url | json }},
+        "name": {{ blog.title | escape | json }}
+      }
+    }
+
+    {%- assign pos = pos | plus: 1 -%}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ pos }},
+      "item": {
+        "@id": {{ request.origin | append: article.url | json }},
+        "name": {{ article.title | escape | json }}
+      }
+    }
+
+  {%- elsif template.name == 'page' -%}
+    {%- assign pos = pos | plus: 1 -%}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ pos }},
+      "item": {
+        "@id": {{ request.origin | append: page.url | json }},
+        "name": {{ page.title | escape | json }}
+      }
+    }
+
+  {%- else -%}
+    {%- assign pos = pos | plus: 1 -%}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ pos }},
+      "item": {
+        "@id": {{ request.origin | append: request.path | json }},
+        "name": {{ page_title | escape | json }}
+      }
+    }
+  {%- endif -%}
+{%- endcapture -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{{ breadcrumb_items | strip }}]
+}
+</script>

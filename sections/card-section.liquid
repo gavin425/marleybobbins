@@ -1,0 +1,355 @@
+{{ 'card-section.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.mpadding_top }}px;
+    padding-bottom: {{ section.settings.mpadding_bottom }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+<script src="{{ 'card-section.js' | asset_url }}" defer="defer"></script>
+{% if section.settings.hr_enable %}
+<hr style="    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #751612;
+    max-width: 400px;
+    margin: auto;
+    background: #f4eee2;" class="desktop-hidden">
+    {% endif %}
+<div class="{{section.settings.section-class}} card-section {% if section.settings.template != blank %} {{section.settings.template}}{% endif %} color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+    <div class="wrapper page-width">
+        {% if section.settings.two_column %}
+        <div class="flex-card">
+        {% endif %}
+        {%- if section.settings.pre_title != blank or section.settings.title != blank or section.settings.text != blank -%}
+            <div class="head theme-text-element">
+
+                {%- if section.settings.pre_title != blank -%}
+                    <p class="theme-pretitle">{{ section.settings.pre_title }}</p>
+                {%- endif -%}
+
+                {% if section.settings.title-l != blank %}
+                    <h2>{{ section.settings.title-l }}</h2>
+                {% else %}
+                    {%- if section.settings.title != blank -%}
+                        <h2>{{ section.settings.title }}</h2>
+                    {%- endif -%}
+                {%- endif -%}
+
+                {%- if section.settings.text != blank -%}
+                    <p class="text">
+                        {{ section.settings.text }}
+                    </p>
+                {%- endif -%}
+
+            </div>
+        {%- endif -%}
+
+        {%- if section.settings.video != blank -%}
+            {%- assign mp4 = section.settings.video.sources | where: 'format', 'mp4' | first -%}
+        {%- endif -%}
+
+        {%- if mp4 != blank -%}
+            {%- assign poster = '' -%}
+            {%- if section.settings.video_poster != blank -%}
+                {%- assign poster = section.settings.video_poster | image_url: width: 2000 -%}
+            {%- endif -%}
+
+            <div class="video" data-video-wrap>
+                <div class="video-inner">
+
+                <div class="player">
+                    <video
+                        data-video
+                        playsinline
+                        preload="metadata"
+                        {% if poster != blank %}poster="{{ poster }}"{% endif %}
+                    >
+                        <source src="{{ mp4.url }}" type="video/mp4">
+                    </video>
+                </div>
+
+                <button type="button" class="play" aria-label="Play video" data-video-play></button>
+
+                </div>
+            </div>
+        {%- endif -%}
+        {% if section.settings.two_column %}
+        </div>
+        {% endif %}
+        {%- if section.blocks.size > 0 -%}
+            <div class="cards">
+
+                {%- for block in section.blocks -%}
+                    {%- style -%}
+                    .stemba .section-card-{{ section.id }}-{{ forloop.index }}{
+                       
+                        {% if block.settings.card-cb != blank %}
+                        background-color: {{block.settings.card-cb}};
+                        color: {{block.settings.card-text}};
+                        {% else %}
+                        border-bottom:2px solid #CA573B;
+                        {% endif %}
+                    }
+                    .stemba .section-card-{{ section.id }}-{{ forloop.index }} h3{
+                        color: {{block.settings.card-text}};
+                    }
+                    @media (max-width: 768px){
+                        .stemba .m-bg .section-card-{{ section.id }}-{{ forloop.index }} {
+                            background-color: transparent;
+                            color: #751612;
+                            border-bottom: 2px solid var(--theme-color-secondary);
+                        }
+                        .stemba .m-bg .section-card-{{ section.id }}-{{ forloop.index }} h3{
+                            color: #751612;
+                        }
+                    }
+                    {%- endstyle -%}
+                    {%- if block.type == 'card' -%}
+                        <div class="section-card-{{ section.id }}-{{ forloop.index }} card theme-text-element" {{ block.shopify_attributes }}>
+                            <div class="card-head">
+                                {%- if block.settings.pre_title != blank -%}
+                                    <p class="card-pretitle">{{ block.settings.pre_title }}</p>
+                                {%- endif -%}
+
+                                {%- if block.settings.title != blank -%}
+                                    <h3 class="card-title">{{ block.settings.title }}</h3>
+                                {%- endif -%}
+                            </div>
+                            {%- if block.settings.text != blank -%}
+                                <p class="card-text">{{ block.settings.text }}</p>
+                            {%- endif -%}
+
+                        </div>
+                    {%- endif -%}
+                {%- endfor -%}
+
+            </div>
+        {%- endif -%}
+
+    </div>
+    <div class="button_wrapper">
+     {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        <a class="{{section.settings.button-style}} with-arrow" {% if section.settings.btntype %} rel="noopener" target="_blank" {% endif %} href="{{ section.settings.button_link }}">
+            {{ section.settings.button_label }}
+        </a>
+     {% endif %}
+    </div>
+    {%- if section.settings.show_underline -%}
+        <span class="theme-bottom-underline" aria-hidden="true"></span>
+    {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+    "name": "Card section",
+    "tag": "section",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hr_enable",
+            "label": "Hr Enable",
+            "default":false
+        },
+        {
+            "type": "checkbox",
+            "id": "two_column",
+            "label": "2 Column Layout",
+            "default":false
+        },
+        {
+            "type": "text",
+            "id": "section-class",
+            "label": "Section Class"
+        },
+        {
+            "type": "select",
+            "id": "template",
+            "label": "Template",
+            "default": "template-1",
+            "options": [
+                {
+                    "value": "template-1",
+                    "label": "Template 1"
+                },
+                {
+                    "value": "template-2",
+                    "label": "Template 2"
+                }
+            ]
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "t:sections.all.colors.label",
+            "default": "scheme-1"
+        },
+        {
+            "type": "text",
+            "id": "pre_title",
+            "label": "Pre-title"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "liquid",
+            "id": "title-l",
+            "label": "Title Liquid"
+        },
+        {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text"
+        },
+        {
+            "type": "video",
+            "id": "video",
+            "label": "Video"
+        },
+        {
+            "type": "image_picker",
+            "id": "video_poster",
+            "label": "Video poster image"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_underline",
+            "label": "Show underline",
+            "default": false
+        },
+        { 
+            "type": "text", 
+            "id": "button_label", 
+            "label": "Button label" 
+        },
+        { 
+            "type": "url", 
+            "id": "button_link", 
+            "label": "Button link" 
+        },
+        {
+            "type": "checkbox",
+            "id": "btntype",
+            "label": "Clinical Study" 
+        },
+        {
+            "type": "select",
+            "id": "button-style",
+            "label": "Button Style",
+            "default": "theme-btn-secondary",
+            "options": [
+                {
+                    "value": "theme-btn-primary",
+                    "label": "Primary"
+                },
+                {
+                    "value": "theme-btn-secondary",
+                    "label": "Secondary"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 52
+        },
+        {
+            "type": "range",
+            "id": "mpadding_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Mobile Padding Top",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "mpadding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Mobile Padding Bottom",
+            "default": 52
+        }
+    ],
+    "blocks": [
+        {
+        "type": "card",
+        "name": "Card",
+        "limit": 4,
+        "settings": [
+            {
+                "type": "text",
+                "id": "pre_title",
+                "label": "Pre-title"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "textarea",
+                "id": "text",
+                "label": "Text"
+            },
+            {
+                "type": "color",
+                "id":"card-cb",
+                "label": "Color Background"
+            },
+            {
+                "type": "color",
+                "id":"card-text",
+                "label": "Color Text"
+            }
+        ]
+        }
+    ],
+    "presets": [
+        {
+        "name": "Card section",
+        "blocks": [
+            { 
+                "type": "card" 
+            },
+            { 
+                "type": "card" 
+            },
+            { 
+                "type": "card" 
+            },
+            { 
+                "type": "card" 
+            }
+        ]
+        }
+    ]
+}
+{% endschema %}

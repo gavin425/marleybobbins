@@ -1,0 +1,208 @@
+.stemba .reviews-section{
+    padding: 150px 0 100px;
+    position: relative;
+}
+
+.stemba .reviews-section .head{
+    max-width: 642px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.stemba .reviews-section .head .theme-pretitle{
+    justify-content: center;
+}
+
+.stemba .reviews-section .head h2{
+    margin-top: 70px;
+    text-align: center;
+}
+.stemba .review-norm-text {
+    text-align: center;
+    margin:0;
+}
+.stemba .reviews-section .reviews{
+    display: flex;
+    flex-wrap: wrap;
+    --items-gap: 5px;
+    --items-count: 3;
+    margin-top: 60px;
+    gap: var(--items-gap);
+}
+
+.stemba .reviews-section .review{
+    background-color: var(--theme-color-white);
+    border-radius: var(--theme-radius);
+    padding: 60px;
+    width: calc(100% / var(--items-count) - ((var(--items-gap) * (var(--items-count) - 1) / var(--items-count))));
+    display: flex;
+    flex-direction: column;
+        justify-content: flex-start;
+}
+
+.stemba .reviews-section .review-text{
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 0;
+    min-height: 255px;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column;
+}
+
+.stemba .reviews-section .review-author{
+       margin-top: 0;
+    min-height: 20px;
+    margin-bottom: 0;
+}
+
+.stemba .reviews-section .review-verified{
+    margin-top: 10px;
+    color: var(--theme-color-secondary);
+    font-size: var(--theme-fs-body-xs);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stemba .reviews-section .review-verified::before{
+    content: "";
+    display: block;
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    background-color: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 15 15' fill='none'%3E%3Cg clip-path='url(%23clip0_528_571)'%3E%3Cpath d='M13.0591 5.41829C13.0089 5.36953 12.9689 5.31125 12.9416 5.24685C12.9142 5.18246 12.9 5.11325 12.8997 5.04329V3.56204C12.8992 3.1743 12.745 2.80258 12.4708 2.52841C12.1966 2.25424 11.8249 2.10001 11.4372 2.09954H9.95594C9.88598 2.09923 9.81678 2.08498 9.75239 2.05762C9.688 2.03025 9.62971 1.99032 9.58094 1.94016L8.54031 0.899535C8.26363 0.624852 7.88957 0.470703 7.49969 0.470703C7.10981 0.470703 6.73575 0.624852 6.45906 0.899535L5.41844 1.94016C5.36967 1.99032 5.31138 2.03025 5.24699 2.05762C5.1826 2.08498 5.1134 2.09923 5.04344 2.09954H3.56219C3.17445 2.10001 2.80274 2.25424 2.52857 2.52841C2.2544 2.80258 2.10016 3.1743 2.09969 3.56204V5.04329C2.09941 5.11325 2.08517 5.18246 2.05781 5.24685C2.03044 5.31125 1.99049 5.36953 1.94031 5.41829L0.899689 6.45891C0.624914 6.73555 0.470703 7.10963 0.470703 7.49954C0.470703 7.88944 0.624914 8.26353 0.899689 8.54016L1.94031 9.58079C1.99049 9.62954 2.03044 9.68783 2.05781 9.75222C2.08517 9.81661 2.09941 9.88582 2.09969 9.95579V11.437C2.10016 11.8248 2.2544 12.1965 2.52857 12.4707C2.80274 12.7448 3.17445 12.8991 3.56219 12.8995H5.04344C5.1134 12.8998 5.1826 12.9141 5.24699 12.9415C5.31138 12.9688 5.36967 13.0088 5.41844 13.0589L6.45906 14.0995C6.59568 14.2363 6.75791 14.3447 6.93646 14.4187C7.11502 14.4927 7.30641 14.5308 7.49969 14.5308C7.69297 14.5308 7.88436 14.4927 8.06291 14.4187C8.24147 14.3447 8.40369 14.2363 8.54031 14.0995L9.58094 13.0589C9.62971 13.0088 9.688 12.9688 9.75239 12.9415C9.81678 12.9141 9.88598 12.8998 9.95594 12.8995H11.4372C11.8249 12.8991 12.1966 12.7448 12.4708 12.4707C12.745 12.1965 12.8992 11.8248 12.8997 11.437V9.95579C12.9 9.88582 12.9142 9.81661 12.9416 9.75222C12.9689 9.68783 13.0089 9.62954 13.0591 9.58079L14.0997 8.54016C14.3745 8.26353 14.5287 7.88944 14.5287 7.49954C14.5287 7.10963 14.3745 6.73555 14.0997 6.45891L13.0591 5.41829ZM9.70281 6.58079L7.20906 9.08391C7.11882 9.16837 6.99985 9.21536 6.87625 9.21536C6.75265 9.21536 6.63368 9.16837 6.54344 9.08391L5.29656 7.82766C5.21099 7.74034 5.16333 7.62277 5.16395 7.50051C5.16456 7.37824 5.21341 7.26116 5.29986 7.17471C5.38632 7.08825 5.5034 7.03941 5.62566 7.03879C5.74792 7.03818 5.86549 7.08583 5.95281 7.17141L6.87156 8.09016L9.04656 5.91516C9.13431 5.82952 9.25207 5.78158 9.37469 5.78158C9.4973 5.78158 9.61506 5.82952 9.70281 5.91516C9.74733 5.9584 9.78273 6.01014 9.80689 6.06731C9.83106 6.12447 9.84351 6.18591 9.84351 6.24797C9.84351 6.31004 9.83106 6.37147 9.80689 6.42864C9.78273 6.48581 9.74733 6.53754 9.70281 6.58079Z' fill='%23CA573B'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_528_571'%3E%3Crect width='15' height='15' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+.stemba .reviews-section .review .quote-mark{
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='43' height='14' viewBox='0 0 43 14' fill='none'%3E%3Cpath d='M29.3178 0C31.8702 0 33.1851 1.54696 33.1851 5.64641C33.1851 7.11602 33.3398 14 27.3841 14L27.152 13.768C30.6327 13.5359 32.0249 11.2155 32.0249 7.42541C31.4835 8.0442 30.5553 8.27624 29.3178 8.27624C26.7653 8.27624 25.5277 6.80663 25.5277 4.1768C25.5277 1.54696 26.7653 0 29.3178 0ZM42.7763 5.64641C42.7763 7.11602 42.931 14 37.0525 14L36.7431 13.768C40.2238 13.5359 41.6934 11.2155 41.6934 7.42541C41.0746 8.0442 40.1464 8.27624 38.9862 8.27624C36.4338 8.27624 35.1188 6.80663 35.1188 4.1768C35.1188 1.54696 36.4338 0 38.9862 0C41.5387 0 42.7763 1.54696 42.7763 5.64641Z' fill='%23CA573B'/%3E%3Cpath d='M13.4589 5.72376C16.0114 5.72376 17.2489 7.19337 17.2489 9.8232C17.2489 12.453 16.0114 14 13.4589 14C10.9064 14 9.59151 12.453 9.59151 8.35359C9.59151 6.88398 9.43682 0 15.3926 0L15.6246 0.232045C12.144 0.464086 10.7517 2.78453 10.7517 6.57459C11.2932 5.9558 12.2213 5.72376 13.4589 5.72376ZM3.79043 5.72376C6.34291 5.72376 7.65782 7.19337 7.65782 9.8232C7.65782 12.453 6.34291 14 3.79043 14C1.23795 14 0.000386737 12.453 0.000386737 8.35359C0.000386737 6.88398 -0.154309 0 5.72412 0L6.03351 0.232045C2.55286 0.464086 1.08326 2.78453 1.08326 6.57459C1.70204 5.9558 2.63021 5.72376 3.79043 5.72376Z' fill='%23CA573B'/%3E%3C/svg%3E") no-repeat center / contain;
+    background-color: var(--theme-color-secondary);
+    width: 43px;
+    height: 14px;
+    display: block;
+    margin-bottom: 90px;
+}
+
+.stemba .reviews-section .template-2 .review .quote-mark{
+    margin-bottom: 93px;
+}
+
+.stemba .reviews-section .template-2{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.stemba .reviews-section .template-2 .head{
+    width: 30%;
+    margin: 0;
+}
+
+.stemba .reviews-section .template-2 .head .theme-pretitle{
+    justify-content: flex-start;
+}
+
+.stemba .reviews-section .template-2 .head h2{
+    text-align: left;
+}
+
+.stemba .reviews-section .template-2 .reviews{
+    --items-count: 2;
+    width: 66.482%;
+    margin-top: 0;
+}
+
+
+@media (max-width: 991px) {
+    .stemba .reviews-section .reviews{
+        --items-count: 1;
+        margin-top: 40px;
+    }
+
+    .stemba .reviews-section{
+        padding: 70px 0 0px;
+    }
+
+    .stemba .reviews-section .theme-bottom-underline{
+        display: none;
+    }
+
+    .stemba .reviews-section .head{
+        margin: 0;
+    }
+
+    .stemba .reviews-section .head .theme-pretitle{
+        justify-content: flex-start;
+    }
+
+    .stemba .reviews-section .head h2{
+        text-align: left;
+        margin-top: 40px;
+    }
+
+    .stemba .reviews-section .review{
+        padding: 40px;
+    }
+
+    .stemba .reviews-section .review .quote-mark{
+        width: 30px;
+        height: 10px;
+        margin-bottom: 42px;
+    }
+
+    .stemba .reviews-section .template-2{
+        flex-direction: column;
+    }
+
+    .stemba .reviews-section .template-2 .head{
+        width: 100%;
+    }
+
+    .stemba .reviews-section .template-2 .reviews{
+        width: 100%;
+        flex-direction: column;
+        --items-count: 1;
+    }
+
+    .stemba .reviews-section .template-2 {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stemba .reviews-section .head h2{
+        max-width: 251px;
+    }
+
+    .stemba .reviews-section .review-text{
+        font-size: calc(var(--theme-fs-body-mobile-md) - 1px);
+        min-height:auto;
+    }
+
+    .stemba .reviews-section .review-author{
+        font-size: calc(var(--theme-fs-body-mobile-sm) + 2px);
+    }
+
+    .stemba .reviews-section .template-2 .head h2 {
+        max-width: unset;
+    }
+
+    .stemba .reviews-section .template-2 .review .quote-mark {
+        margin-bottom: 42px;
+    }
+
+    .stemba .reviews-section .review-author {
+        margin-top: 0;
+    }
+
+    .stemba .reviews-section .review-verified{
+        font-size: var(--theme-fs-body-mobile-sm);
+        margin-top: 0;
+    }
+
+    .stemba .reviews-section .review-verified::before{
+        width: 12px;
+        height: 12px;
+    }
+}

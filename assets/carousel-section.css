@@ -1,0 +1,371 @@
+.stemba .carousel-section{
+    padding: 120px 0;
+    background-color: var(--theme-helper-color-primary);
+    position: relative;
+}
+
+.stemba .carousel-section .wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.stemba .carousel-section .head-actions{
+    width: 27.593%;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stemba .carousel-section .head-btn{
+    margin-top: 50px;
+    align-self: flex-start;
+}
+
+.stemba .carousel-section .head{
+    width: 100%;
+    padding-top: 0;
+}
+
+.stemba .carousel-section .head .theme-pretitle{
+    justify-content: flex-start;
+}
+
+.stemba .carousel-section .head h2{
+    font-size: var(--theme-fs-h3);
+    margin-top: 70px;
+    line-height: var(--theme-lh-md);
+    white-space: normal;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.stemba .carousel-section .carousel{
+    width: 65.4328%;
+    position: relative;
+}
+
+.stemba .carousel-section .carousel .theme-slider{
+    --slides-count: 3;
+    --slides-gap: 5px;
+}
+
+.stemba .carousel-section .carousel .card{
+    border-radius: var(--theme-radius);
+    background: var(--theme-helper-color-tertiary);
+    padding: 40px 40px 38px;
+}
+
+.stemba .carousel-section .carousel .card .icon{
+    width: 35px;
+    height: 35px;
+}
+
+.stemba .carousel-section .carousel .card .icon img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.stemba .carousel-section .carousel .card .title{
+    font-size: var(--theme-fs-body-xxl);
+    line-height: normal;
+    margin-top: 109px;
+}
+
+.stemba .carousel-section .carousel .card .text{
+    margin-top: 76px;
+    margin-bottom: 0;
+}
+
+.stemba .carousel-section .carousel .theme-next-btn{
+    position: absolute;
+    top: 30px;
+    right: -20px;
+}
+
+.stemba .carousel-section .theme-slider .swiper-wrapper{
+    align-items: stretch;
+}
+
+.stemba .carousel-section .theme-slider .swiper-slide{
+    height: auto;
+    display: flex;
+}
+
+.stemba .carousel-section .theme-slider .swiper-slide .card{
+    height: 100%;
+    width: 100%;
+}
+
+.stemba .carousel-section:has(.template-2),
+.stemba .carousel-section:has(.template-3){
+    background: none;
+}
+
+.stemba .carousel-section .wrapper.template-2,
+.stemba .carousel-section .wrapper.template-3{
+    flex-direction: column;
+    gap: 60px;
+}
+
+.stemba .carousel-section .wrapper.template-2 .carousel .theme-slider,
+.stemba .carousel-section .wrapper.template-3 .carousel .theme-slider{
+    --slides-count: 5;
+}
+
+.stemba .carousel-section .wrapper.template-2 .carousel .card{
+    background-color: var(--theme-color-white);
+}
+
+.stemba .carousel-section .wrapper.template-2 .carousel,
+.stemba .carousel-section .wrapper.template-3 .carousel{
+    width: 100%;
+}
+
+.stemba .carousel-section .wrapper.template-2 .head-actions{
+    width: 100%;
+    max-width: 561px;
+    margin: 0 auto;
+    padding-top: 28px;
+}
+
+.stemba .carousel-section .wrapper.template-3 .head-actions{
+    width: 100%;
+    max-width: 737px;
+    margin: 0 auto;
+    padding-top: 28px;
+}
+
+.stemba .carousel-section .wrapper.template-2 .head .theme-pretitle,
+.stemba .carousel-section .wrapper.template-3 .head .theme-pretitle{
+    justify-content: center;
+}
+
+.stemba .carousel-section .wrapper.template-2 .head h2,
+.stemba .carousel-section .wrapper.template-3 .head h2{
+    text-align: center;
+    font-size: var(--theme-fs-h2);
+}
+
+.stemba .carousel-section .wrapper.template-2 .card,
+.stemba .carousel-section .wrapper.template-3 .card{
+    padding: 50px 40px 40px;
+}
+
+.stemba .carousel-section .wrapper.template-2 .card h3{
+    font-family :var(--theme-font-family-secondary);
+    font-weight: 600;
+    margin-top: 116px;
+}
+
+.stemba .carousel-section .wrapper.template-3 .card h3{
+    font-family :var(--theme-font-family-primary);
+    font-weight: 400;
+}
+
+.stemba .carousel-section .wrapper.template-2 .carousel .card .text{
+    margin-top: 57px;
+}
+
+.stemba .carousel-section .theme-slider-progress {
+  margin-top: 20px;
+  height: 1.5px;
+  background: rgba(117, 22, 18, 0.10);
+  overflow: hidden;
+  display: none;
+}
+
+.stemba .carousel-section  .theme-slider-progress-bar {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: currentColor;
+  transition: width .25s ease;
+}
+
+.stemba .carousel-section .wrapper.template-3 .carousel .card{
+    background-color: var(--theme-helper-color-primary);
+}
+
+.stemba .carousel-section .wrapper.template-3 .carousel .card .text{
+    margin-top: 50px;
+}
+
+.stemba .carousel-section .wrapper .head p{
+    margin: 40px auto 0;
+    max-width: 255px;
+    text-align: center;
+}
+
+@media (max-width: 1400px) {
+    .stemba .carousel-section .carousel .theme-slider{
+        --slides-count: 2;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .carousel .theme-slider,
+    .stemba .carousel-section .wrapper.template-3 .carousel .theme-slider{
+        --slides-count: 4;
+    }
+
+    .stemba .carousel-section .head-actions{
+        width: 30%;
+    }
+
+    .stemba .carousel-section .theme-slider-progress {
+        display: block;
+    }
+}
+
+@media (max-width: 1200px){
+    .stemba .carousel-section .carousel .theme-slider{
+        --slides-count: 3;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .carousel .theme-slider,
+    .stemba .carousel-section .wrapper.template-3 .carousel .theme-slider{
+        --slides-count: 3;
+    }
+
+    .stemba .carousel-section .wrapper{
+        flex-direction: column;
+    }
+
+    .stemba .carousel-section .head-actions{
+        display: contents;
+        width: auto;
+        padding-top: 0;
+    }
+
+    .stemba .carousel-section .head-actions .head{
+        order: 1;
+    }
+
+    .stemba .carousel-section .carousel{
+        order: 2;
+        width: 100%;
+    }
+
+    .stemba .carousel-section .head-btn{
+        order: 3;
+        align-self: flex-start;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 991px){
+    .stemba .carousel-section .carousel .theme-slider{
+        --slides-count: 2;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .carousel .theme-slider,
+    .stemba .carousel-section .wrapper.template-3 .carousel .theme-slider{
+        --slides-count: 2;
+    }
+
+    .stemba .carousel-section .carousel,
+    .stemba .carousel-section .wrapper.template-3 .carousel{
+        margin-top: 18px;
+        width: calc(100% - 20px);
+    }
+
+    .stemba .carousel-section{
+        padding: 60px 0;
+    }
+
+    .stemba .carousel-section .head h2{
+        margin-top: 40px;
+    }
+
+    .stemba .carousel-section:has(.template-2){
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 768px){
+    .stemba .carousel-section .head h2{
+        max-width:  291px;
+    }
+
+    .stemba .carousel-section .carousel .card .icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .stemba .carousel-section .carousel .card .title {
+        font-size: calc(var(--theme-fs-body-mobile-lg) + 1px);
+        margin-top: 40px;
+    }
+
+    .stemba .carousel-section .carousel .card .text {
+        margin-top: 21px;
+        font-size: calc(var(--theme-fs-body-mobile-md) - 1px);
+    }
+
+    .stemba .carousel-section .theme-btn-primary{
+        margin-top: 10px;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .carousel .theme-slider,
+    .stemba .carousel-section .wrapper.template-3 .carousel .theme-slider{
+        --slides-count: 1.73;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .head .theme-pretitle,
+    .stemba .carousel-section .wrapper.template-3 .head .theme-pretitle {
+        justify-content: flex-start;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .head h2,
+    .stemba .carousel-section .wrapper.template-3 .head h2 {
+        text-align: left;
+    }
+
+    .stemba .carousel-section .wrapper .head p{
+        text-align: left;
+        margin: 30px 0 0 ;
+    }
+
+    .stemba .carousel-section .wrapper.template-2,
+    .stemba .carousel-section .wrapper.template-3{
+        gap: 22px;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .carousel .card,
+    .stemba .carousel-section .wrapper.template-3 .carousel .card {
+        padding: 36px 30px 30px;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .carousel .card .icon,
+    .stemba .carousel-section .wrapper.template-3 .carousel .card .icon{
+        width: 25px;
+        height: 25px;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .card h3,
+    .stemba .carousel-section .wrapper.template-3 .card h3 {
+        margin-top: 72px;
+        font-size: calc(var(--theme-fs-body-mobile-md) - 1px);
+    }
+
+    .stemba .carousel-section .wrapper.template-2 .carousel .card .text,
+    .stemba .carousel-section .wrapper.template-3 .carousel .card .text{
+        font-size: calc(var(--theme-fs-body-mobile-sm) + 2px);
+        margin-top: 30px;
+        letter-spacing: -0.005em;
+    }
+
+    .stemba .carousel-section .wrapper.template-2 + .theme-bottom-underline,
+    .stemba .carousel-section .wrapper.template-3 + .theme-bottom-underline{
+        display: none;
+    }
+
+}
+
+@media (max-width: 540px){
+    .stemba .carousel-section .carousel .theme-slider,
+    .stemba .carousel-section .wrapper.template-3 .carousel .theme-slider{
+        --slides-count: 1;
+    }
+}

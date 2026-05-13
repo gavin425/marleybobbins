@@ -1,0 +1,164 @@
+{{ 'accordion-section.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'accordion-section.js' | asset_url }}" defer="defer"></script>
+
+
+<div class="page-width">
+    <div class="wrapper">
+
+        <div class="head">
+            {%- if section.settings.pretitle != blank -%}
+                <div class="theme-pretitle">{{ section.settings.pretitle }}</div>
+            {%- endif -%}
+
+            {%- if section.settings.title != blank -%}
+                <h2>{{ section.settings.title }}</h2>
+            {%- endif -%}
+
+            {%- if section.settings.text != blank -%}
+                <div class="text">
+                    {{ section.settings.text }}
+                </div>
+            {%- endif -%}
+            <div class="mobile-hidden">
+            {%- if section.settings.liquid != blank -%}
+              {{ section.settings.liquid }}
+              {%- endif -%}
+              </div>
+        </div>
+
+        <div class="accordions">
+            {%- assign accordion_index = 0 -%}
+            {%- for block in section.blocks -%}
+                {%- if block.type == 'accordion' -%}
+                    {%- assign accordion_index = accordion_index | plus: 1 -%}
+                    {%- assign is_open = false -%}
+                    {%- if accordion_index == 1 -%}
+                        {%- assign is_open = true -%}
+                    {%- endif -%}
+
+                    <div class="accordion{% if is_open %} open{% endif %}" {{ block.shopify_attributes }}>
+                        <button class="question" type="button" aria-expanded="{% if is_open %}true{% else %}false{% endif %}">
+                            <span class="icon" aria-hidden="true"></span>
+
+                            {%- if block.settings.question != blank -%}
+                                <span class="question-text">{{ block.settings.question }}</span>
+                            {%- endif -%}
+                        </button>
+
+                        <div class="answer">
+                            {%- if block.settings.answer != blank -%}
+                                <div class="answer-inner theme-text-element">
+                                    {{ block.settings.answer }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+         <div class="desktop-hidden">
+         {%- if section.settings.liquid != blank -%}
+              {{ section.settings.liquid }}
+              {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{%- capture faq_json -%}
+    {%- assign count = 0 -%}
+    {%- for block in section.blocks -%}
+        {%- if block.type == 'accordion' and block.settings.question != blank and block.settings.answer != blank -%}
+            {%- assign q = block.settings.question | strip | escape -%}
+            {%- assign a = block.settings.answer | strip_html | strip | escape -%}
+
+            {%- if count > 0 -%},{%- endif -%}
+            {"@type":"Question","name":"{{ q }}","acceptedAnswer":{"@type":"Answer","text":"{{ a }}"}}
+
+            {%- assign count = count | plus: 1 -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endcapture -%}
+
+{%- if count > 0 -%}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [{{ faq_json | strip }}]
+        }
+    </script>
+{%- endif -%}
+
+
+
+{% schema %}
+{
+"name": "Accordion",
+"tag": "section",
+"class": "accordion-section",
+"settings": [
+    {
+    "type": "text",
+    "id": "pretitle",
+    "label": "Pre-title",
+    "default": "FAQ"
+    },
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "What if I miss a day?"
+    },
+    {
+    "type": "text",
+    "id": "text",
+    "label": "Text",
+    "default": "And other things women ask us"
+    },
+    {
+    "type": "liquid",
+    "id": "liquid",
+    "label": "Liquid"
+    }
+],
+"blocks": [
+    {
+    "type": "accordion",
+    "name": "Accordion",
+    "settings": [
+        {
+        "type": "text",
+        "id": "question",
+        "label": "Question",
+        "default": "Does Daysy work if my cycles are irregular?"
+        },
+        {
+        "type": "richtext",
+        "id": "answer",
+        "label": "Answer",
+        "default": "<p>Yes, but it will have more conservative outputs. If your cycles are consistently longer than 40 days, or if your doctor has raised concerns, it’s best to speak with a clinician. Daysy is not a diagnostic tool.</p>"
+        }
+    ]
+    }
+],
+"presets": [
+    {
+    "name": "Accordion",
+    "blocks": [
+        { 
+            "type": "accordion" 
+        },
+        { 
+            "type": "accordion" 
+        },
+        { 
+            "type": "accordion" 
+        },
+        { 
+            "type": "accordion" 
+        }
+    ]
+    }
+]
+}
+{% endschema %}

@@ -1,0 +1,225 @@
+{{ 'carousel-section.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'theme-slider.js' | asset_url }}" defer="defer"></script>
+
+<div class="page-width">
+  <div class="wrapper{% if section.settings.template != blank %} {{ section.settings.template }}{% endif %}">
+
+    {%- assign has_head = false -%}
+    {%- if section.settings.pre_title != blank or section.settings.title != blank -%}
+      {%- assign has_head = true -%}
+    {%- endif -%}
+
+    {%- assign has_button = false -%}
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      {%- assign has_button = true -%}
+    {%- endif -%}
+
+    {%- if has_head or has_button -%}
+      <div class="head-actions">
+        {%- if has_head -%}
+          <div class="head theme-text-element">
+
+            {%- if section.settings.pre_title != blank -%}
+              <div class="theme-pretitle">{{ section.settings.pre_title }}</div>
+            {%- endif -%}
+
+            {%- if section.settings.title != blank -%}
+              <h2>{{ section.settings.title }}</h2>
+            {%- endif -%}
+
+            {%- if section.settings.text != blank -%}
+              <p>{{ section.settings.text }}</p>
+            {%- endif -%}
+
+          </div>
+        {%- endif -%}
+
+        {%- if has_button -%}
+          <a class="theme-btn-primary with-arrow head-btn" href="{{ section.settings.button_link }}">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="carousel theme-slider-wrap">
+      <div class="swiper theme-slider" data-theme-slider>
+        <div class="swiper-wrapper">
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'card' -%}
+              <div class="swiper-slide" {{ block.shopify_attributes }}>
+                <div class="card">
+
+                  {%- if block.settings.card_icon != blank -%}
+                    <div class="icon">
+                      <img
+                        src="{{ block.settings.card_icon | image_url: width: 80 }}"
+                        srcset="
+                          {{ block.settings.card_icon | image_url: width: 40 }} 40w,
+                          {{ block.settings.card_icon | image_url: width: 80 }} 80w,
+                          {{ block.settings.card_icon | image_url: width: 120 }} 120w
+                        "
+                        sizes="40px"
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                        alt="{{ block.settings.card_icon.alt | escape }}"
+                      >
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.card_title != blank -%}
+                    <h3 class="title">{{ block.settings.card_title }}</h3>
+                  {%- endif -%}
+
+                  {%- if block.settings.card_text != blank -%}
+                    <p class="text">{{ block.settings.card_text | newline_to_br }}</p>
+                  {%- endif -%}
+
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+        </div>
+      </div>
+
+      {%- if section.settings.show_nav -%}
+        <button type="button" class="theme-next-btn" aria-label="Next slide" data-swiper-next></button>
+      {%- endif -%}
+
+      {%- if section.settings.show_progress -%}
+        <div
+          class="theme-slider-progress"
+          data-swiper-progress
+          role="progressbar"
+          aria-label="Slider progress"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+        >
+          <span class="theme-slider-progress-bar" data-swiper-progress-bar></span>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  {%- if section.settings.show_underline -%}
+    <span class="theme-bottom-underline" aria-hidden="true"></span>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Carousel",
+  "tag": "section",
+  "class": "carousel-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "template",
+      "label": "Template",
+      "default": "template-1",
+      "options": [
+        { 
+          "value": "template-1", 
+          "label": "Template 1" 
+        },
+        { 
+          "value": "template-2", 
+          "label": "Template 2" 
+        },
+        { 
+          "value": "template-3", 
+          "label": "Template 3" 
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "pre_title",
+      "label": "Pre-title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_nav",
+      "label": "Show navigation arrow",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress",
+      "label": "Show progress bar",
+      "default": false
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_underline",
+      "label": "Show underline",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { 
+          "type": "image_picker", 
+          "id": "card_icon", 
+          "label": "Icon" 
+        },
+        { 
+          "type": "text", 
+          "id": "card_title", 
+          "label": "Title" 
+        },
+        { 
+          "type": "textarea", 
+          "id": "card_text", 
+          "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carousel section",
+      "blocks": [
+        { 
+          "type": "card" 
+        },
+        { 
+          "type": "card" 
+        },
+        { 
+          "type": "card" 
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

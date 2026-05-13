@@ -1,0 +1,111 @@
+{{ 'before-after-section.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width">
+
+
+    {%- if section.settings.title != blank -%}
+        <div class="head theme-text-element">
+            <span class="theme-month-icon" aria-hidden="true"></span>
+
+            <h2>{{ section.settings.title | newline_to_br }}</h2>
+
+            <span class="theme-month-icon" aria-hidden="true"></span>
+        </div>
+    {%- endif -%}
+
+    <div class="wrapper">
+
+        <div class="col before">
+            {%- if section.settings.before_title != blank -%}
+                <h3>{{ section.settings.before_title }}</h3>
+            {%- endif -%}
+
+            {%- if section.settings.before_text != blank -%}
+                <div class="text theme-text-element">
+                    {{ section.settings.before_text | newline_to_br }}
+                </div>
+            {%- endif -%}
+        </div>
+
+        <div class="col after">
+            {%- if section.settings.after_title != blank -%}
+                <h3>{{ section.settings.after_title }}</h3>
+            {%- endif -%}
+
+            {%- if section.settings.after_text != blank -%}
+                <div class="text theme-text-element">
+                    {{ section.settings.after_text | newline_to_br }}
+                </div>
+            {%- endif -%}
+        </div>
+
+    </div>
+
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a class="theme-btn-primary with-arrow" href="{{ section.settings.button_link }}">
+            {{ section.settings.button_label }}
+        </a>
+    {%- endif -%}
+
+</div>
+
+{%- if section.settings.show_underline -%}
+    <span class="theme-bottom-underline" aria-hidden="true"></span>
+{%- endif -%}
+
+
+{% schema %}
+{
+    "name": "Before / After",
+    "tag": "section",
+    "class": "before-after-section",
+    "settings": [
+        {
+            "type": "textarea",
+            "id": "title",
+            "label": "Main title"
+        },
+        {
+            "type": "text",
+            "id": "before_title",
+            "label": "Before title"
+        },
+        {
+            "type": "richtext",
+            "id": "before_text",
+            "label": "Before text"
+        },
+        {
+            "type": "text",
+            "id": "after_title",
+            "label": "After title"
+        },
+        {
+            "type": "richtext",
+            "id": "after_text",
+            "label": "After text"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_underline",
+            "label": "Show underline",
+            "default": true
+        }
+    ],
+    "presets": [
+        {
+            "name": "Before / After"
+        }
+    ]
+}
+{% endschema %}

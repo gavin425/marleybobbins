@@ -1,0 +1,188 @@
+.stemba .hero-section{
+    position: relative;
+}
+.stemba .hero-section .image{
+    border-radius: 20px 240px 20px 20px;
+}
+
+.stemba .hero-section .image.both_ani{
+    border-radius: 20px 240px 20px 240px;
+    background:transparent;
+}
+.hero-media {
+    position: relative;
+}
+.stemba .hero-section::before{
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: calc((100vw * 900 / 1620) + 100px);
+    background: radial-gradient(63.06% 63.06% at 50.13% 90%,rgba(215, 121, 95, 0.80) 0%,rgba(244, 238, 227, 0.80) 100%);
+    z-index: -1;
+}
+.no-border .image img {
+    object-fit: cover !important;
+    border-radius: 20px;
+}
+.stemba .hero-section .no-border .image {
+    background: transparent;
+}
+@media screen and (min-width: 1700px) {
+  .stemba .hero-section::before{
+    height: calc((100vw * 900 / 1720) + 100px);
+ }
+}
+@media screen and (min-width: 1900px) {
+  .stemba .hero-section::before{
+    height: calc((100vw * 900 / 1920) + 100px);
+    }
+}
+.stemba .hero-section .head{
+    margin-bottom: 50px;
+}
+
+.stemba .hero-section .head h1{
+    max-width: 828px;
+    text-align: center;
+    margin: 116px auto 20px;
+    line-height: var(--theme-lh-md);
+}
+
+.stemba .hero-section .image{
+    width: 100%;
+    height: auto;
+}
+
+.stemba .hero-section .image img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1620/900;
+    object-fit: cover;
+    border-radius: 20px 240px 20px 20px;
+}
+
+.stemba .hero-section .image.both_ani img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1620 / 900;
+    object-fit: cover;
+    border-radius: 20px 240px;
+}
+
+.stemba .hero-section .banner-small .image.both_ani img{
+    border-radius: 20px 180px;
+    aspect-ratio: 1620 / 700;
+}
+
+.stemba .hero-section .text{
+    width: 240px;
+    height: 240px;
+    padding: 30px;
+    background-color: #D7795F;
+    border-radius: 100%;
+    margin: -150px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.stemba .hero-section .text .theme-month-icon{
+    width: 20px;
+    height: 20px;
+    background-color: var(--theme-color-white);
+    margin-bottom: 33px;
+    flex-shrink: 0;
+}
+ 
+.stemba .hero-section .text p{
+    color: var(--theme-color-white);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    max-width: 226px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stemba .hero-section .theme-btn-secondary{
+    margin: 50px auto 0;
+    max-width: 445px;
+}
+
+@media (max-width: 768px){
+
+    .stemba .hero-section{
+        padding: 8px 0 0px;
+    }
+
+    .stemba .hero-section .head h1{
+        margin: 50px auto 20px;
+    }
+
+    .stemba .hero-section .head{
+        margin-bottom: 28px;
+    }
+   
+    .stemba .hero-section .image{
+        border-radius: 20px 150px 20px 20px;
+        aspect-ratio: 335/382;
+    }
+    .stemba .hero-section .image img{
+        height:100% !important;
+    }
+    .stemba .hero-section .image.both_ani{
+        border-radius: 20px 150px 20px 150px;
+    }
+
+    .stemba .hero-section .text{
+        width: 171px;
+        height: 171px;
+        padding: 20px;
+        margin: -93px auto 0;
+    }
+
+    .stemba .hero-section .text .theme-month-icon{
+        margin-bottom: 18px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .stemba .hero-section .text p{
+        font-size: calc(var(--theme-fs-body-mobile-sm) + 2px);
+    }
+
+    .stemba .hero-section .theme-btn-secondary{
+        margin: 50px auto 0;
+        max-width: 445px;
+        margin: 23px auto 0;
+        padding: 16px 25px;
+    }
+
+    .stemba .hero-section::before{
+        height: calc((100vw * 382 / 335) + 100px);
+    }
+    .stemba .hero-section .image img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+        object-fit: cover;
+        border-radius: 20px 150px 20px 20px;
+    }
+    .stemba .hero-section .no-border .image img{
+        border-radius: 20px 20px 20px 20px;
+    }
+    .stemba .hero-section .image.both_ani img {
+        border-radius: 20px 150px 20px 150px;
+                height: 100%;
+    }
+}

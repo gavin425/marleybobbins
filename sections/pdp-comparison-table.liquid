@@ -1,0 +1,173 @@
+{{ 'pdp-comparison-table.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width">
+
+    {%- if section.settings.pre_title != blank or section.settings.title != blank -%}
+        <div class="head theme-text-element">
+            {%- if section.settings.pre_title != blank -%}
+                <p class="theme-pretitle">{{ section.settings.pre_title }}</p>
+            {%- endif -%}
+
+            {%- if section.settings.title != blank -%}
+                <h2>{{ section.settings.title }}</h2>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+
+    {%- assign columns = section.blocks | where: 'type', 'column' -%}
+    {%- assign rows = section.blocks | where: 'type', 'row' -%}
+    {%- assign col_count = columns.size -%}
+
+    <div class="table" style="--cols: {{ col_count }};">
+
+        <div class="table-head">
+            <div class="cell label"></div>
+
+            {%- for block in columns -%}
+                <div class="cell head-cell" {{ block.shopify_attributes }}>
+                    {{ block.settings.label }}
+                </div>
+            {%- endfor -%}
+        </div>
+
+        <div class="table-body">
+            {%- for block in rows -%}
+                <div class="table-row" {{ block.shopify_attributes }}>
+                    <div class="cell label">
+                        {{ block.settings.label }}
+                    </div>
+
+                    {%- assign values = block.settings.values | split: '|' -%}
+
+                    {%- for col in columns -%}
+                        {%- assign i = forloop.index0 -%}
+                        <div class="cell">
+                            {{ values[i] | strip }}
+                        </div>
+                    {%- endfor -%}
+
+                </div>
+            {%- endfor -%}
+        </div>
+
+    </div>
+
+    <div class="wrapper">
+    
+        {%- if section.settings.note != blank -%}
+            <div class="note theme-text-element">
+                {{ section.settings.note }}
+            </div>
+        {%- endif -%}
+
+
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+            <a class="theme-btn-primary with-arrow" href="{{ section.settings.button_link }}">
+                {{ section.settings.button_label }}
+            </a>
+        {%- endif -%}
+
+    </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "PDP comparison table",
+  "tag": "section",
+  "class": "pdp-comparison-table",
+  "settings": [
+    {
+        "type": "text",
+        "id": "pre_title",
+        "label": "Pre-title"
+    },
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+    },
+    {
+        "type": "richtext",
+        "id": "note",
+        "label": "Note"
+    },
+    {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button text"
+    },
+    {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+        "type": "column",
+        "name": "Column",
+        "settings": [
+            {
+                "type": "text",
+                "id": "label",
+                "label": "Label",
+                "default": "Daysy"
+            }
+        ]
+    },
+    {
+        "type": "row",
+        "name": "Row",
+        "settings": [
+            {
+                "type": "text",
+                "id": "label",
+                "label": "Row label",
+                "default": "Measures hormones"
+            },
+            {
+                "type": "textarea",
+                "id": "values",
+                "label": "Values (use | to separate columns)",
+                "default": "No|Yes|No|No"
+            }
+        ]
+    }
+  ],
+  "presets": [
+    {
+        "name": "PDP comparison table",
+        "blocks": [
+            { 
+                "type": "column" 
+            },
+            { 
+                "type": "column" 
+            },
+            { 
+                "type": "column" 
+            },
+            { 
+                "type": "column" 
+            },
+            { 
+                "type": "row" 
+            },
+            { 
+                "type": "row" 
+            },
+            { 
+                "type": "row" 
+            },
+            { 
+                "type": "row" 
+            },
+            { 
+                "type": "row" 
+            }
+        ]
+    }
+  ]
+}
+{% endschema %}

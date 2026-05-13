@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Hiden Certon";
+  src: url("//stemba.asia/cdn/shop/t/11/assets/HidenCerton-Regular.woff2?v=170261898752171273151778218725") format("woff2"), url("//stemba.asia/cdn/shop/t/11/assets/HidenCerton-Regular.woff?v=106462878475336818141778218725") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("//stemba.asia/cdn/shop/t/11/assets/Caveat-Regular.woff2?v=120134192857581885961778218696") format("woff2"), url("//stemba.asia/cdn/shop/t/11/assets/Caveat-Regular.woff?v=79202449474155949041778218695") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Light.woff2?v=140092653216187438501778218720") format("woff2"), url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Light.woff?v=35925510037526914301778218720") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Regular.woff2?v=112129438865921900401778218722") format("woff2"), url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Regular.woff?v=111085439988565148811778218721") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Medium.woff2?v=141787772153121387221778218721") format("woff2"), url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Medium.woff?v=65228960148031869771778218721") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-SemiBold.woff2?v=66256813051927098531778218723") format("woff2"), url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-SemiBold.woff?v=106670570787478945641778218722") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Bold.woff2?v=19357239522003316791778218719") format("woff2"), url("//stemba.asia/cdn/shop/t/11/assets/Gilroy-Bold.woff?v=67157696771562944121778218719") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

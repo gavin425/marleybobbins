@@ -1,0 +1,188 @@
+.stemba .product-promo-section{
+    padding: 100px 0 40px;
+}
+
+.stemba .product-promo-section .wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.stemba .product-promo-section .product-promo__media{
+    width: 48%;
+    display: flex;
+}
+
+.stemba .product-promo-section .product-promo__media img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio:  838/739;
+    border-radius: var(--theme-radius);
+}
+
+.stemba .product-promo-section .product-promo__meta{
+    width: 43.21%;
+    padding-top: 65px;
+}
+
+.stemba .product-promo-section .product-promo__meta h2{
+    font-size: var(--theme-fs-h3);
+}
+
+.stemba .product-promo-section .product-promo__description{
+    margin-top: 51px;
+}
+
+.stemba .product-promo-section .product-promo__description p strong{
+    font-size: var(--theme-fs-body-xxl);
+}
+
+.stemba .product-promo-section .product-promo__purchase{
+  margin-top: 100px;
+  margin-bottom: 14px;
+}
+
+.stemba .product-promo-section .product-sticky-bar .product-promo__purchase{
+    justify-content: center;
+    gap: 58px;
+    margin: 0;
+}
+
+.stemba .product-promo-section .product-promo__price-stock{
+  width: max-content;
+  flex-shrink: 0;
+}
+
+.stemba .product-promo-section .product-promo__price-stock .price-item--regular{
+  color: var(--theme-color-primary);
+  font-size: var(--theme-fs-h4);
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.2;
+}
+
+.stemba .product-promo-section .product-promo__stock{
+  color: var(--theme-color-secondary);
+  font-size: var(--theme-fs-body-sm);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.stemba .product-promo-section .product-promo__purchase{
+  display: flex;
+  gap: 10%;
+  align-items: flex-start;
+}
+
+.stemba .product-promo-section .product-promo__cta{
+  width: 100%;
+}
+
+.stemba .product-promo-section .product-promo__buy{
+  max-width: unset;
+  font-size: var(--theme-fs-body-xl);
+}
+
+.stemba .product-promo-section .product-promo__logos{
+    display: flex;
+    flex-wrap: wrap;
+    --items-gap-x: 5px;
+    --items-gap-y: 15px;
+    --items-count: 3;
+    gap: var(--items-gap-y) var(--items-gap-x);
+    margin-top: 40px;
+}
+
+.stemba .product-promo-section .product-promo__logo{
+    width: calc(100% / var(--items-count) - ((var(--items-gap-x) * (var(--items-count) - 1) / var(--items-count))));
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    border-bottom: 2px solid var(--theme-color-secondary);
+    border-radius: 40px;
+    padding: 20px 30px;
+    height: 65px
+}
+
+.stemba .product-promo-section .product-promo__logo img{
+    max-height: 37px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.stemba .product-promo-section .product-promo__purchase-note{
+    width: 100%;
+    text-align: right;
+    opacity: 0.7;
+    font-size: calc(var(--theme-fs-body-xs) - 1px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 170%;
+    display: block;
+    padding-right: 19px;
+    margin: 0;
+}
+
+.stemba .product-promo-section .product-promo__logo-link{
+    Width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+}
+
+@media (max-width: 1200px) {
+    .stemba .product-promo-section .wrapper{
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .stemba .product-promo-section .product-promo__media{
+        width: 100%;
+    }
+
+    .stemba .product-promo-section .product-promo__meta{
+        width: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .stemba .product-promo-section{
+        padding: 70px 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stemba .product-promo-section .product-promo__media img{
+        aspect-ratio: 335/375;
+    }
+
+    .stemba .product-promo-section .product-promo__meta{
+        padding-top: 25px;
+    }
+
+    .stemba .product-promo-section .product-promo__description {
+        margin-top: 20px;
+    }
+
+    .stemba .product-promo-section .product-promo__purchase{
+        margin-top: 20px;
+    }
+
+    .stemba .product-promo-section .theme-btn-primary{
+        font-size: calc(var(--theme-fs-body-xs) - 1px)
+    }
+
+    .stemba .product-promo-section .product-promo__description p{
+        font-size: var(--theme-fs-body-mobile-md);
+    }
+
+    .stemba .product-promo-section .product-promo__description p strong{
+        font-size: var(--theme-fs-body-mobile-lg);
+    }
+
+    .stemba .product-promo-section .product-promo__purchase-note{
+        font-size: var(--theme-fs-body-mobile-sm);
+    }
+}

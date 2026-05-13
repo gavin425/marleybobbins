@@ -1,0 +1,82 @@
+{{ 'marquee-section.css' | asset_url | stylesheet_tag }}
+
+{%- assign blocks_count = section.blocks.size -%}
+{%- assign min_items = 14 -%}
+{%- assign repeat_times = 0 -%}
+
+{%- if blocks_count > 0 -%}
+  {%- assign full_loops = min_items | divided_by: blocks_count -%}
+  {%- assign remainder = min_items | modulo: blocks_count -%}
+  {%- assign repeat_times = full_loops -%}
+
+  {%- if remainder > 0 -%}
+    {%- assign repeat_times = repeat_times | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if repeat_times < 4 -%}
+    {%- assign repeat_times = 4 -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div class="marquee-wrapper">
+
+{%- if section.blocks.size > 0 -%}
+    {%- for i in (1..2) -%}
+    <div class="marquee" aria-hidden="{% if i == 2 %}true{% else %}false{% endif %}">
+        <div class="marquee-track">
+
+        {%- for r in (1..repeat_times) -%}
+            {%- for block in section.blocks -%}
+            <div class="marquee-item"{% if r == 1 %} {{ block.shopify_attributes }}{% endif %}>
+
+                <span class="marquee-icon theme-month-icon"></span>
+
+                {%- if block.settings.text != blank -%}
+                <span class="marquee-text">{{ block.settings.text }}</span>
+                {%- endif -%}
+
+            </div>
+            {%- endfor -%}
+        {%- endfor -%}
+
+        </div>
+    </div>
+    {%- endfor -%}
+{%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Marquee",
+  "tag": "section",
+  "class": "marquee-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { 
+          "type": "text", 
+          "id": "text", 
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee",
+      "blocks": [
+        { 
+          "type": "item" 
+        },
+        { 
+          "type": "item" 
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

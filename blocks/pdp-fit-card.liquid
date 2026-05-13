@@ -1,0 +1,97 @@
+{% style %}
+  .stemba .pdp-fit-section .slide .items.bitems-{{ block.id }}{
+    --items-count: {{block.settings.column-nm}};
+    --items-gap-x: 46px;
+    --items-gap-y: 60px;
+    }
+@media (max-width: 768px){
+   .stemba .pdp-fit-section .slide .items.bitems-{{ block.id }}{
+    --items-count: 1;
+    --items-gap-x: 20px;
+    --items-gap-y: 20px;
+    } 
+}
+{% endstyle %}
+
+{%- assign scheme = block.settings.color_scheme | default: 'light' -%}
+
+<div class="slide color-{{ scheme }} ">
+    {% if block.settings.title != blank %}
+        <h3>{{ block.settings.title }}</h3>
+    {% endif %}
+
+    <div class="items bitems-{{ block.id }}">
+        {%- assign rendered = 0 -%}
+        {%- for child in block.blocks -%}
+            {%- assign rendered = rendered | plus: 1 -%}
+            {%- if rendered <= 6 -%}
+                {% render child %}
+            {%- endif -%}
+        {%- endfor -%}
+    </div>
+    <button type="button" class="theme-next-btn pd-fit" aria-label="Next" data-swiper-next></button>
+</div>
+
+
+{% schema %}
+{
+    "name": "Fit card",
+    "class": "swiper-slide",
+    "blocks": [
+        { 
+            "type": "@theme" 
+        }, 
+        { 
+            "type": "@app" 
+        }
+    ],
+    "settings": [
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "label": "Color scheme",
+            "default": "light",
+            "options": [
+                {
+                    "value": "light",
+                    "label": "Light (#F4EEE3)"
+                },
+                {
+                    "value": "dark",
+                    "label": "Dark (#751612)"
+                }
+            ]
+        },
+        { 
+            "type": "text", 
+            "id": "title", 
+            "label": "Title" 
+        },
+        {
+            "type": "number", 
+            "id": "column-nm", 
+            "label": "Column Number",
+            "default": 2
+        }
+    ],
+    "presets": [
+        {
+            "name": "Fit card",
+            "blocks": [
+                { 
+                    "type": "pdp-fit-item" 
+                },
+                { 
+                    "type": "pdp-fit-item" 
+                },
+                { 
+                    "type": "pdp-fit-item" 
+                },
+                { 
+                    "type": "pdp-fit-item" 
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

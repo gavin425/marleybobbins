@@ -1,0 +1,115 @@
+.stemba .before-after-section{
+    position: relative;
+    padding: 150px 0;
+}
+
+.stemba .before-after-section .head{
+    max-width: 1041px;
+    margin: 0 auto 100px;
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stemba .before-after-section .head h2{
+    max-width: 591px;
+    text-align: center;
+    margin: 0;
+}
+
+.stemba .before-after-section .head .theme-month-icon{
+    width: 25px;
+    height: 25px;
+    background-color: var( --theme-color-secondary);
+}
+
+.stemba .before-after-section .wrapper{
+    display: flex;
+    background-color: var(--theme-color-primary);
+    border-radius: var(--theme-radius);
+    color: var(--theme-helper-color-tertiary);
+}
+
+.stemba .before-after-section .wrapper .after{
+    background-color: var(--theme-color-secondary);
+    border-radius: var(--theme-radius);
+}
+
+.stemba .before-after-section .wrapper h3{
+    color: var(--theme-helper-color-tertiary);
+    font-size: var(--theme-fs-h4);
+    margin: 0 0 60px;
+}
+
+.stemba .before-after-section .wrapper .text{
+    margin-top: auto;
+}
+
+.stemba .before-after-section .wrapper .text p{
+    font-size: var(--theme-fs-body-xxl);
+    margin: 40px 0;
+}
+
+.stemba .before-after-section .wrapper .col{
+    width: 50%;
+    padding: 80px 80px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stemba .before-after-section .theme-btn-primary{
+    margin: 50px auto 0;
+    max-width: 483px;
+}
+
+@media (max-width: 768px) {
+
+    .stemba .before-after-section{
+        padding: 70px 0 0;
+    }
+
+    .stemba .before-after-section .theme-bottom-underline{
+        display: none;
+    }
+
+    .stemba .before-after-section .head{
+        flex-direction: column;
+        max-width: 253px;
+        margin: 0 auto 91px;
+    }
+
+    .stemba .before-after-section .head h2{
+        font-size: var(--theme-fs-h1);
+    }
+
+    .stemba .before-after-section .head .theme-month-icon{
+        width: 20px;
+        height: 20px;
+    }
+
+    .stemba .before-after-section .theme-btn-primary{
+        padding: 18px 20px;
+        gap: 0;
+        margin-top: 30px;
+    }
+
+    .stemba .before-after-section .wrapper{
+        flex-direction: column;
+    }
+
+    .stemba .before-after-section .wrapper .col{
+        width: 100%;
+        padding: 40px;
+    }
+
+    .stemba .before-after-section .wrapper h3{
+        font-size: calc(var(--theme-fs-body-mobile-lg) + 2px);
+        margin-bottom: 38px;
+    }
+
+    .stemba .before-after-section .wrapper .text p{
+        font-size: calc(var(--theme-fs-body-mobile-md) - 1px);
+        margin: 20px 0;
+    }
+}
